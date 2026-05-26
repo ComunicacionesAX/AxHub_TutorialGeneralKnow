@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriales | Asimetrix</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #014469;
+            --primary-dark: #001a2e;
+            --primary-light: #9bccf7;
+            --primary-container: #275c82;
+            --accent: #4BA2FF;
+            --accent-aqua: #00E3FF;
+            --sidebar-bg: #0a1e2f;
+            --sidebar-text: #b0c4d9;
+            --sidebar-active: #ffffff;
+            --sidebar-hover: rgba(255,255,255,0.08);
+            --sidebar-width: 280px;
+            --text: #181c1d;
+            --text-light: #41474e;
+            --bg: #f6fafb;
+            --surface: #ffffff;
+            --outline: #72787f;
+            --outline-variant: #c1c7cf;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--bg);
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: var(--sidebar-width);
+            background: var(--sidebar-bg);
+            color: var(--sidebar-text);
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            overflow-y: auto;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar-header {
+            padding: 1.25rem 1.25rem 0.75rem;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .sidebar-header h2 {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: -0.02em;
+        }
+
+        .sidebar-header p {
+            font-size: 0.75rem;
+            color: var(--sidebar-text);
+            margin-top: 0.25rem;
+            opacity: 0.7;
+        }
+
+        .sidebar-nav {
+            padding: 0.75rem 0;
+            flex: 1;
+        }
+
+        .nav-section {
+            margin-bottom: 0.25rem;
+        }
+
+        .nav-section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.625rem 1.25rem;
+            cursor: pointer;
+            font-size: 0.8125rem;
+            font-weight: 600;
+            color: var(--sidebar-text);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.2s;
+            user-select: none;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+        }
+
+        .nav-section-header:hover {
+            background: var(--sidebar-hover);
+            color: #fff;
+        }
+
+        .nav-section-header .icon {
+            font-size: 18px;
+            transition: transform 0.25s;
+        }
+
+        .nav-section-header .icon.open {
+            transform: rotate(90deg);
+        }
+
+        .nav-subsection {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .nav-subsection.open {
+            max-height: 2000px;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 0.625rem;
+            padding: 0.5rem 1.25rem 0.5rem 2.5rem;
+            color: var(--sidebar-text);
+            text-decoration: none;
+            font-size: 0.8125rem;
+            font-weight: 400;
+            transition: all 0.15s;
+            cursor: pointer;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+        }
+
+        .nav-link:hover {
+            background: var(--sidebar-hover);
+            color: #fff;
+        }
+
+        .nav-link.active {
+            color: #fff;
+            background: rgba(75, 162, 255, 0.15);
+            border-right: 3px solid var(--accent);
+            font-weight: 500;
+        }
+
+        .nav-link .material-symbols-outlined {
+            font-size: 16px;
+            opacity: 0.7;
+        }
+
+        .nav-link.active .material-symbols-outlined {
+            opacity: 1;
+        }
+
+        .nav-simple-link {
+            display: flex;
+            align-items: center;
+            gap: 0.625rem;
+            padding: 0.625rem 1.25rem;
+            color: var(--sidebar-text);
+            text-decoration: none;
+            font-size: 0.8125rem;
+            font-weight: 500;
+            transition: all 0.15s;
+            cursor: pointer;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+        }
+
+        .nav-simple-link:hover {
+            background: var(--sidebar-hover);
+            color: #fff;
+        }
+
+        .nav-simple-link.active {
+            color: #fff;
+            background: rgba(75, 162, 255, 0.15);
+            border-right: 3px solid var(--accent);
+        }
+
+        .nav-simple-link .material-symbols-outlined {
+            font-size: 20px;
+        }
+
+        /* Main content */
+        .main {
+            margin-left: var(--sidebar-width);
+            flex: 1;
+            padding: 2.5rem 3rem;
+            min-height: 100vh;
+        }
+
+        .main-header {
+            margin-bottom: 2rem;
+        }
+
+        .main-header .breadcrumb {
+            font-size: 0.8125rem;
+            color: var(--outline);
+            margin-bottom: 0.5rem;
+        }
+
+        .main-header .breadcrumb a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .main-header .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .main-header h1 {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: var(--text);
+            letter-spacing: -0.03em;
+        }
+
+        .main-header p {
+            color: var(--text-light);
+            margin-top: 0.5rem;
+            max-width: 700px;
+        }
+
+        .tutorial-content {
+            background: var(--surface);
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+            border: 1px solid rgba(114, 120, 127, 0.08);
+            min-height: 400px;
+        }
+
+        .tutorial-content h2 {
+            font-size: 1.375rem;
+            font-weight: 800;
+            color: var(--text);
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        .tutorial-content p {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            line-height: 1.7;
+        }
+
+        .tutorial-content ul, .tutorial-content ol {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .tutorial-content li {
+            margin-bottom: 0.5rem;
+        }
+
+        .tutorial-content .info-box {
+            background: rgba(1, 68, 105, 0.08);
+            border-left: 4px solid var(--primary);
+            padding: 1rem 1.25rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tutorial-content .info-box h4 {
+            font-size: 0.875rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .tutorial-content .info-box p {
+            margin-bottom: 0;
+            font-size: 0.875rem;
+        }
+
+        .tutorial-content .step-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .tutorial-content .step-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--outline-variant);
+            margin-bottom: 0;
+        }
+
+        .tutorial-content .step-list li:last-child {
+            border-bottom: none;
+        }
+
+        .tutorial-content .step-list .step-num {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            min-width: 28px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: #fff;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .empty-state {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .empty-state .material-symbols-outlined {
+            font-size: 64px;
+            color: var(--outline-variant);
+            margin-bottom: 1rem;
+        }
+
+        .empty-state h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 0.5rem;
+        }
+
+        .empty-state p {
+            color: var(--text-light);
+            max-width: 400px;
+        }
+
+        .sidebar-footer {
+            padding: 1rem 1.25rem;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            font-size: 0.75rem;
+            color: var(--sidebar-text);
+            opacity: 0.6;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                position: relative;
+                height: auto;
+            }
+            .main {
+                margin-left: 0;
+                padding: 1.5rem;
+            }
+            body {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <h2>Tutoriales</h2>
+            <p>Base de conocimiento Asimetrix</p>
+        </div>
+
+        <nav class="sidebar-nav">
+
+            <!-- Plataforma -->
+            <div class="nav-section">
+                <button class="nav-section-header" onclick="toggleSection('plataforma')">
+                    <span>Plataforma</span>
+                    <span class="material-symbols-outlined icon open" id="icon-plataforma">chevron_right</span>
+                </button>
+                <div class="nav-subsection open" id="sub-plataforma">
+                    <button class="nav-link" data-section="plataforma" data-tutorial="bienvenido" onclick="openTutorial('plataforma', 'bienvenido')">
+                        <span class="material-symbols-outlined">home</span> ¡Bienvenido al portal!
+                    </button>
+                    <button class="nav-link" data-section="plataforma" data-tutorial="registro" onclick="openTutorial('plataforma', 'registro')">
+                        <span class="material-symbols-outlined">person_add</span> Regístrate en el portal
+                    </button>
+                    <button class="nav-link" data-section="plataforma" data-tutorial="filtrar-fechas" onclick="openTutorial('plataforma', 'filtrar-fechas')">
+                        <span class="material-symbols-outlined">calendar_month</span> Filtra por fechas
+                    </button>
+                    <button class="nav-link" data-section="plataforma" data-tutorial="filtro-predeterminado" onclick="openTutorial('plataforma', 'filtro-predeterminado')">
+                        <span class="material-symbols-outlined">filter_alt</span> Crea un filtro predeterminado
+                    </button>
+                    <button class="nav-link" data-section="plataforma" data-tutorial="variable-defecto" onclick="openTutorial('plataforma', 'variable-defecto')">
+                        <span class="material-symbols-outlined">tune</span> Cambia la variable por defecto
+                    </button>
+                    <button class="nav-link" data-section="plataforma" data-tutorial="subir-archivo-know" onclick="openTutorial('plataforma', 'subir-archivo-know')">
+                        <span class="material-symbols-outlined">upload</span> Sube un archivo a Know
+                    </button>
+                    <button class="nav-link" data-section="plataforma" data-tutorial="carga-filemanager" onclick="openTutorial('plataforma', 'carga-filemanager')">
+                        <span class="material-symbols-outlined">folder</span> Carga archivos en File Manager
+                    </button>
+                    <button class="nav-link" data-section="plataforma" data-tutorial="verificar-carga" onclick="openTutorial('plataforma', 'verificar-carga')">
+                        <span class="material-symbols-outlined">fact_check</span> Verifica la carga de tu archivo
+                    </button>
+                    <button class="nav-link" data-section="plataforma" data-tutorial="visualizar-dashboard" onclick="openTutorial('plataforma', 'visualizar-dashboard')">
+                        <span class="material-symbols-outlined">dashboard</span> Visualiza la información en el dashboard
+                    </button>
+                    <button class="nav-link" data-section="plataforma" data-tutorial="cambiar-colores" onclick="openTutorial('plataforma', 'cambiar-colores')">
+                        <span class="material-symbols-outlined">palette</span> Cambia los colores de tus gráficas
+                    </button>
+                    <button class="nav-link" data-section="plataforma" data-tutorial="exportar-grafica" onclick="openTutorial('plataforma', 'exportar-grafica')">
+                        <span class="material-symbols-outlined">image</span> Exporta una gráfica en imagen o PDF
+                    </button>
+                    <button class="nav-link" data-section="plataforma" data-tutorial="descargar-datos" onclick="openTutorial('plataforma', 'descargar-datos')">
+                        <span class="material-symbols-outlined">download</span> Descarga los datos o imagen de un gráfico
+                    </button>
+                    <button class="nav-link" data-section="plataforma" data-tutorial="crear-alertas" onclick="openTutorial('plataforma', 'crear-alertas')">
+                        <span class="material-symbols-outlined">notifications</span> Crea alertas
+                    </button>
+                    <button class="nav-link" data-section="plataforma" data-tutorial="solucionar-carga" onclick="openTutorial('plataforma', 'solucionar-carga')">
+                        <span class="material-symbols-outlined">bug_report</span> Soluciona que no cargue
+                    </button>
+                    <button class="nav-link" data-section="plataforma" data-tutorial="nueva-hoja-resumen" onclick="openTutorial('plataforma', 'nueva-hoja-resumen')">
+                        <span class="material-symbols-outlined">summarize</span> Nueva hoja resumen AsimetrixKnow
+                    </button>
+                    <button class="nav-link" data-section="plataforma" data-tutorial="porcicultura" onclick="openTutorial('plataforma', 'porcicultura')">
+                        <span class="material-symbols-outlined">pets</span> Porcicultura
+                    </button>
+                    <button class="nav-link" data-section="plataforma" data-tutorial="reporte-sowmax" onclick="openTutorial('plataforma', 'reporte-sowmax')">
+                        <span class="material-symbols-outlined">assessment</span> Genera reporte SowMax
+                    </button>
+                </div>
+            </div>
+
+            <!-- PigKnows -->
+            <div class="nav-section">
+                <button class="nav-section-header" onclick="toggleSection('pigknows')">
+                    <span>PigKnows</span>
+                    <span class="material-symbols-outlined icon" id="icon-pigknows">chevron_right</span>
+                </button>
+                <div class="nav-subsection" id="sub-pigknows">
+                    <button class="nav-simple-link" onclick="openSimple('pigknows')">
+                        <span class="material-symbols-outlined">pets</span> Tutoriales PigKnows
+                    </button>
+                </div>
+            </div>
+
+            <!-- Agriness -->
+            <div class="nav-section">
+                <button class="nav-section-header" onclick="toggleSection('agriness')">
+                    <span>Agriness</span>
+                    <span class="material-symbols-outlined icon" id="icon-agriness">chevron_right</span>
+                </button>
+                <div class="nav-subsection" id="sub-agriness">
+                    <button class="nav-simple-link" onclick="openSimple('agriness')">
+                        <span class="material-symbols-outlined">agriculture</span> Tutoriales Agriness
+                    </button>
+                </div>
+            </div>
+
+            <!-- Porcitec -->
+            <div class="nav-section">
+                <button class="nav-section-header" onclick="toggleSection('porcitec')">
+                    <span>Porcitec</span>
+                    <span class="material-symbols-outlined icon" id="icon-porcitec">chevron_right</span>
+                </button>
+                <div class="nav-subsection" id="sub-porcitec">
+                    <button class="nav-simple-link" onclick="openSimple('porcitec')">
+                        <span class="material-symbols-outlined">manufacturing</span> Tutoriales Porcitec
+                    </button>
+                </div>
+            </div>
+
+        </nav>
+
+        <div class="sidebar-footer">
+            Asimetrix &mdash; Base de conocimiento v1.0
+        </div>
+    </aside>
+
+    <!-- Main content -->
+    <main class="main">
+        <div class="main-header">
+            <div class="breadcrumb">
+                <a href="onboarding%20(1).html">Onboarding</a>
+                <span class="material-symbols-outlined" style="font-size: 14px; vertical-align: middle;">chevron_right</span>
+                Tutoriales
+            </div>
+            <h1 id="main-title">Tutoriales generales</h1>
+            <p id="main-description">Selecciona un tutorial del menú lateral para comenzar.</p>
+        </div>
+
+        <div class="tutorial-content" id="tutorial-content">
+            <div class="empty-state">
+                <span class="material-symbols-outlined">menu_book</span>
+                <h3>Selecciona un tutorial</h3>
+                <p>Elige un tema del menú lateral izquierdo para ver su contenido.</p>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function toggleSection(id) {
+            const sub = document.getElementById('sub-' + id);
+            const icon = document.getElementById('icon-' + id);
+            const isOpen = sub.classList.contains('open');
+            sub.classList.toggle('open');
+            icon.classList.toggle('open');
+        }
+
+        const tutorials = {
+            plataforma: {
+                bienvenido: {
+                    title: '¡Bienvenido al portal!',
+                    description: 'Conoce la plataforma Asimetrix y su ecosistema.',
+                    content: `
+                        <h2>¡Bienvenido al portal Asimetrix!</h2>
+                        <p>Asimetrix es una plataforma de monitoreo inteligente para tu producción. Con nuestras herramientas puedes visualizar, analizar y optimizar tus procesos productivos.</p>
+                        <div class="info-box">
+                            <h4>Qué encontrarás aquí</h4>
+                            <p>Dashboards interactivos, carga de archivos ETL, generación de reportes y alertas inteligentes para tu operación.</p>
+                        </div>
+                        <p>Explora las secciones del menú lateral para aprender a usar cada funcionalidad de la plataforma.</p>
+                    `
+                },
+                registro: {
+                    title: 'Regístrate en el portal',
+                    description: 'Aprende a crear tu cuenta y acceder a la plataforma.',
+                    content: `
+                        <h2>Regístrate en el portal</h2>
+                        <p>Para acceder a la plataforma Asimetrix necesitas credenciales proporcionadas por el equipo de soporte.</p>
+                        <ol class="step-list">
+                            <li><span class="step-num">1</span> <span>Recibe tus credenciales de acceso por parte del equipo Asimetrix.</span></li>
+                            <li><span class="step-num">2</span> <span>Ingresa a la URL de la plataforma proporcionada.</span></li>
+                            <li><span class="step-num">3</span> <span>Usa tu usuario y contraseña temporales para iniciar sesión.</span></li>
+                            <li><span class="step-num">4</span> <span>Cambia tu contraseña y configura tu perfil.</span></li>
+                            <li><span class="step-num">5</span> <span>Verifica tu correo electrónico si es requerido.</span></li>
+                        </ol>
+                        <div class="info-box">
+                            <h4>Nota</h4>
+                            <p>El registro es gestionado por el equipo de Asimetrix. No se permite registro público.</p>
+                        </div>
+                    `
+                },
+                'filtrar-fechas': {
+                    title: 'Filtra por fechas',
+                    description: 'Aprende a filtrar información por rango de fechas.',
+                    content: `
+                        <h2>Filtra por fechas</h2>
+                        <p>Los dashboards de Asimetrix te permiten filtrar la información por rangos de fecha para analizar periodos específicos.</p>
+                        <ol class="step-list">
+                            <li><span class="step-num">1</span> <span>Ubica el selector de fechas en la parte superior del dashboard.</span></li>
+                            <li><span class="step-num">2</span> <span>Selecciona la fecha de inicio y fecha de fin del periodo deseado.</span></li>
+                            <li><span class="step-num">3</span> <span>El dashboard se actualizará automáticamente mostrando los datos del rango seleccionado.</span></li>
+                        </ol>
+                    `
+                },
+                'filtro-predeterminado': {
+                    title: 'Crea un filtro predeterminado',
+                    description: 'Configura filtros que se apliquen automáticamente.',
+                    content: `
+                        <h2>Crea un filtro predeterminado</h2>
+                        <p>Puedes guardar tus filtros favoritos para que se apliquen automáticamente cada vez que ingreses al dashboard.</p>
+                        <ol class="step-list">
+                            <li><span class="step-num">1</span> <span>Aplica los filtros que desees en el dashboard.</span></li>
+                            <li><span class="step-num">2</span> <span>Busca la opción "Guardar como predeterminado".</span></li>
+                            <li><span class="step-num">3</span> <span>Asigna un nombre a tu filtro.</span></li>
+                            <li><span class="step-num">4</span> <span>El filtro se aplicará automáticamente en tu próxima visita.</span></li>
+                        </ol>
+                    `
+                },
+                'variable-defecto': {
+                    title: 'Cambia la variable por defecto',
+                    description: 'Personaliza la variable principal del dashboard.',
+                    content: `
+                        <h2>Cambia la variable por defecto</h2>
+                        <p>Personaliza cuál variable quieres ver por defecto al abrir tus dashboards.</p>
+                        <ol class="step-list">
+                            <li><span class="step-num">1</span> <span>Accede a la configuración del dashboard.</span></li>
+                            <li><span class="step-num">2</span> <span>Busca la sección "Variable por defecto".</span></li>
+                            <li><span class="step-num">3</span> <span>Selecciona la variable que deseas mostrar inicialmente.</span></li>
+                            <li><span class="step-num">4</span> <span>Guarda los cambios.</span></li>
+                        </ol>
+                    `
+                },
+                'subir-archivo-know': {
+                    title: 'Sube un archivo a Know',
+                    description: 'Aprende a cargar archivos en la sección Know.',
+                    content: `
+                        <h2>Sube un archivo a Know</h2>
+                        <p>La sección Know te permite cargar archivos para su procesamiento ETL.</p>
+                        <ol class="step-list">
+                            <li><span class="step-num">1</span> <span>Accede a la sesión de tu empresa.</span></li>
+                            <li><span class="step-num">2</span> <span>Dirígete a la sección Know.</span></li>
+                            <li><span class="step-num">3</span> <span>Selecciona la opción de carga de archivos.</span></li>
+                            <li><span class="step-num">4</span> <span>Arrastra o busca el archivo Excel (.xlsx).</span></li>
+                            <li><span class="step-num">5</span> <span>Confirma la carga y espera el correo de respuesta.</span></li>
+                        </ol>
+                        <div class="info-box">
+                            <h4>Formatos aceptados</h4>
+                            <p>Solo archivos Excel (.xlsx) originados de tu software de captura o casa genética.</p>
+                        </div>
+                    `
+                },
+                'carga-filemanager': {
+                    title: 'Carga archivos en File Manager',
+                    description: 'Gestiona tus archivos en el File Manager.',
+                    content: `
+                        <h2>Carga archivos en File Manager</h2>
+                        <p>El File Manager te permite organizar y gestionar los archivos que subes a la plataforma.</p>
+                        <ol class="step-list">
+                            <li><span class="step-num">1</span> <span>Accede a la sección de File Manager.</span></li>
+                            <li><span class="step-num">2</span> <span>Selecciona la ruta designada para tu archivo (empresa/granja).</span></li>
+                            <li><span class="step-num">3</span> <span>Arrastra o selecciona tu archivo Excel (.xlsx).</span></li>
+                            <li><span class="step-num">4</span> <span>Confirma la carga.</span></li>
+                        </ol>
+                    `
+                },
+                'verificar-carga': {
+                    title: 'Verifica la carga de tu archivo',
+                    description: 'Confirma que tu archivo se haya procesado correctamente.',
+                    content: `
+                        <h2>Verifica la carga de tu archivo</h2>
+                        <p>Después de subir un archivo, puedes verificar su estado de procesamiento.</p>
+                        <ol class="step-list">
+                            <li><span class="step-num">1</span> <span>Revisa tu correo electrónico para ver el resultado del proceso ETL.</span></li>
+                            <li><span class="step-num">2</span> <span>Ingresa a la plataforma y navega al dashboard.</span></li>
+                            <li><span class="step-num">3</span> <span>Confirma que los datos cargados se reflejen correctamente.</span></li>
+                            <li><span class="step-num">4</span> <span>Si hay errores, corrige según las observaciones del correo y vuelve a subir.</span></li>
+                        </ol>
+                    `
+                },
+                'visualizar-dashboard': {
+                    title: 'Visualiza la información en el dashboard',
+                    description: 'Aprende a navegar e interpretar los dashboards.',
+                    content: `
+                        <h2>Visualiza la información en el dashboard</h2>
+                        <p>Los dashboards de Asimetrix muestran tus datos productivos en gráficos interactivos.</p>
+                        <ol class="step-list">
+                            <li><span class="step-num">1</span> <span>Accede al dashboard desde el menú principal.</span></li>
+                            <li><span class="step-num">2</span> <span>Explora los diferentes paneles y gráficos disponibles.</span></li>
+                            <li><span class="step-num">3</span> <span>Usa los filtros para ajustar la vista a tus necesidades.</span></li>
+                            <li><span class="step-num">4</span> <span>Interactúa con los gráficos: pasa el cursor para ver detalles.</span></li>
+                        </ol>
+                    `
+                },
+                'cambiar-colores': {
+                    title: 'Cambia los colores de tus gráficas',
+                    description: 'Personaliza la apariencia visual de tus gráficos.',
+                    content: `
+                        <h2>Cambia los colores de tus gráficas</h2>
+                        <p>Personaliza la paleta de colores de tus gráficos para adaptarlos a tu marca o preferencias.</p>
+                        <ol class="step-list">
+                            <li><span class="step-num">1</span> <span>Accede a la configuración del dashboard.</span></li>
+                            <li><span class="step-num">2</span> <span>Busca la opción "Personalizar colores".</span></li>
+                            <li><span class="step-num">3</span> <span>Selecciona los nuevos colores para las series de datos.</span></li>
+                            <li><span class="step-num">4</span> <span>Guarda los cambios para que se apliquen en el dashboard.</span></li>
+                        </ol>
+                    `
+                },
+                'exportar-grafica': {
+                    title: 'Exporta una gráfica en imagen o PDF',
+                    description: 'Descarga tus gráficos como imagen o PDF.',
+                    content: `
+                        <h2>Exporta una gráfica en imagen o PDF</h2>
+                        <p>Puedes exportar cualquier gráfico del dashboard para usarlo en informes o presentaciones.</p>
+                        <ol class="step-list">
+                            <li><span class="step-num">1</span> <span>Haz clic en el gráfico que deseas exportar.</span></li>
+                            <li><span class="step-num">2</span> <span>Busca el botón de exportar (generalmente un icono de descarga).</span></li>
+                            <li><span class="step-num">3</span> <span>Selecciona el formato: imagen (PNG) o PDF.</span></li>
+                            <li><span class="step-num">4</span> <span>El archivo se descargará automáticamente.</span></li>
+                        </ol>
+                    `
+                },
+                'descargar-datos': {
+                    title: 'Descarga los datos o imagen de un gráfico',
+                    description: 'Obtén los datos fuente o la imagen de cualquier gráfico.',
+                    content: `
+                        <h2>Descarga los datos o imagen de un gráfico</h2>
+                        <p>Además de exportar la imagen, puedes descargar los datos fuente del gráfico en formato CSV o Excel.</p>
+                        <ol class="step-list">
+                            <li><span class="step-num">1</span> <span>Selecciona el gráfico del que deseas obtener los datos.</span></li>
+                            <li><span class="step-num">2</span> <span>Haz clic en el menú de opciones del gráfico.</span></li>
+                            <li><span class="step-num">3</span> <span>Elige "Descargar datos" para obtener CSV/Excel.</span></li>
+                            <li><span class="step-num">4</span> <span>O elige "Descargar imagen" para obtener el gráfico como PNG.</span></li>
+                        </ol>
+                    `
+                },
+                'crear-alertas': {
+                    title: 'Crea alertas',
+                    description: 'Configura notificaciones para eventos importantes.',
+                    content: `
+                        <h2>Crea alertas</h2>
+                        <p>Las alertas te notifican cuando ocurren eventos importantes en tus datos productivos.</p>
+                        <ol class="step-list">
+                            <li><span class="step-num">1</span> <span>Accede a la sección de Alertas desde el menú.</span></li>
+                            <li><span class="step-num">2</span> <span>Haz clic en "Crear nueva alerta".</span></li>
+                            <li><span class="step-num">3</span> <span>Define las condiciones: variable, umbral, frecuencia.</span></li>
+                            <li><span class="step-num">4</span> <span>Selecciona el canal de notificación (correo, SMS, in-app).</span></li>
+                            <li><span class="step-num">5</span> <span>Guarda la alerta y actívala.</span></li>
+                        </ol>
+                    `
+                },
+                'solucionar-carga': {
+                    title: 'Soluciona que no cargue',
+                    description: 'Resuelve problemas comunes al cargar archivos.',
+                    content: `
+                        <h2>Soluciona que no cargue</h2>
+                        <p>Si tu archivo no se carga correctamente, sigue estos pasos para resolverlo.</p>
+                        <div class="info-box">
+                            <h4>Pasos rápidos</h4>
+                            <p>1. Verifica que el archivo sea .xlsx. 2. Revisa que tenga datos. 3. Confirma los nombres de columnas. 4. Asegúrate de estar en la carpeta correcta.</p>
+                        </div>
+                        <ol class="step-list">
+                            <li><span class="step-num">1</span> <span>Lee el correo que te llegó de Asimetrix para identificar el error.</span></li>
+                            <li><span class="step-num">2</span> <span>Abre tu archivo de Excel y corrige lo que te marcaron.</span></li>
+                            <li><span class="step-num">3</span> <span>Guarda el archivo con el mismo nombre.</span></li>
+                            <li><span class="step-num">4</span> <span>Súbelo otra vez a la misma carpeta.</span></li>
+                            <li><span class="step-num">5</span> <span>Espera el nuevo correo (tarda máximo 2 días hábiles).</span></li>
+                        </ol>
+                    `
+                },
+                'nueva-hoja-resumen': {
+                    title: 'Nueva hoja resumen AsimetrixKnow',
+                    description: 'Conoce la nueva hoja de resumen en AsimetrixKnow.',
+                    content: `
+                        <h2>Nueva hoja resumen AsimetrixKnow</h2>
+                        <p>La hoja resumen de AsimetrixKnow te ofrece una vista consolidada de los indicadores clave de tu producción.</p>
+                        <ol class="step-list">
+                            <li><span class="step-num">1</span> <span>Accede al módulo AsimetrixKnow desde el menú principal.</span></li>
+                            <li><span class="step-num">2</span> <span>Selecciona la opción "Hoja resumen".</span></li>
+                            <li><span class="step-num">3</span> <span>Visualiza los indicadores consolidados de tu operación.</span></li>
+                            <li><span class="step-num">4</span> <span>Usa los filtros para personalizar la vista.</span></li>
+                        </ol>
+                    `
+                },
+                porcicultura: {
+                    title: 'Porcicultura',
+                    description: 'Módulo de porcicultura en la plataforma.',
+                    content: `
+                        <h2>Porcicultura</h2>
+                        <p>El módulo de porcicultura te permite gestionar y analizar los datos de tu producción porcina.</p>
+                        <p>Incluye indicadores clave como conversión alimenticia, ganancia de peso diaria, tasas de mortalidad y más.</p>
+                        <div class="info-box">
+                            <h4>Indicadores disponibles</h4>
+                            <p>Conversión alimenticia, peso promedio, edad al sacrificio, tasa de reemplazo, y más.</p>
+                        </div>
+                    `
+                },
+                'reporte-sowmax': {
+                    title: 'Genera reporte SowMax',
+                    description: 'Aprende a generar reportes en SowMax.',
+                    content: `
+                        <h2>Genera reporte SowMax</h2>
+                        <p>SowMax te permite generar reportes detallados sobre la gestión reproductiva de tu hato porcino.</p>
+                        <ol class="step-list">
+                            <li><span class="step-num">1</span> <span>Accede al módulo SowMax desde el menú.</span></li>
+                            <li><span class="step-num">2</span> <span>Selecciona el tipo de reporte que deseas generar.</span></li>
+                            <li><span class="step-num">3</span> <span>Define los parámetros del reporte (fechas, lotes, etc.).</span></li>
+                            <li><span class="step-num">4</span> <span>Haz clic en "Generar reporte".</span></li>
+                            <li><span class="step-num">5</span> <span>Descarga el reporte en tu formato preferido.</span></li>
+                        </ol>
+                    `
+                }
+            }
+        };
+
+        const simpleSections = {
+            pigknows: {
+                title: 'Tutoriales PigKnows',
+                description: 'Contenido educativo sobre PigKnows.',
+                content: `
+                    <h2>PigKnows</h2>
+                    <p>Próximamente encontrarás aquí los tutoriales sobre PigKnows, la plataforma de gestión porcina.</p>
+                    <div class="info-box">
+                        <h4>Disponible pronto</h4>
+                        <p>Estamos preparando el contenido educativo para PigKnows. Vuelve pronto.</p>
+                    </div>
+                `
+            },
+            agriness: {
+                title: 'Tutoriales Agriness',
+                description: 'Contenido educativo sobre Agriness.',
+                content: `
+                    <h2>Agriness</h2>
+                    <p>Próximamente encontrarás aquí los tutoriales sobre Agriness, la plataforma de gestión avícola.</p>
+                    <div class="info-box">
+                        <h4>Disponible pronto</h4>
+                        <p>Estamos preparando el contenido educativo para Agriness. Vuelve pronto.</p>
+                    </div>
+                `
+            },
+            porcitec: {
+                title: 'Tutoriales Porcitec',
+                description: 'Contenido educativo sobre Porcitec.',
+                content: `
+                    <h2>Porcitec</h2>
+                    <p>Próximamente encontrarás aquí los tutoriales sobre Porcitec, la plataforma de gestión porcina.</p>
+                    <div class="info-box">
+                        <h4>Disponible pronto</h4>
+                        <p>Estamos preparando el contenido educativo para Porcitec. Vuelve pronto.</p>
+                    </div>
+                `
+            }
+        };
+
+        function openTutorial(section, tutorialId) {
+            document.querySelectorAll('.nav-link, .nav-simple-link').forEach(el => el.classList.remove('active'));
+
+            const btn = document.querySelector(`[data-section="${section}"][data-tutorial="${tutorialId}"]`);
+            if (btn) btn.classList.add('active');
+
+            const data = tutorials[section][tutorialId];
+            if (!data) return;
+
+            document.getElementById('main-title').textContent = data.title;
+            document.getElementById('main-description').textContent = data.description;
+            document.getElementById('tutorial-content').innerHTML = data.content;
+        }
+
+        function openSimple(id) {
+            document.querySelectorAll('.nav-link, .nav-simple-link').forEach(el => el.classList.remove('active'));
+
+            const btn = document.querySelector(`.nav-simple-link[onclick*="'${id}'"]`);
+            if (btn) btn.classList.add('active');
+
+            const data = simpleSections[id];
+            if (!data) return;
+
+            document.getElementById('main-title').textContent = data.title;
+            document.getElementById('main-description').textContent = data.description;
+            document.getElementById('tutorial-content').innerHTML = data.content;
+        }
+    </script>
+
+</body>
+</html>

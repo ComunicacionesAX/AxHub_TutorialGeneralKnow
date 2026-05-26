@@ -1,0 +1,1094 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asimetrix | Onboarding carga de archivos</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #014469;
+            --primary-dark: #001a2e;
+            --primary-light: #9bccf7;
+            --primary-container: #275c82;
+            --accent: #4BA2FF;
+            --accent-aqua: #00E3FF;
+            --accent-aqua-gray: #7EC6DE;
+            --tertiary: #00484f;
+            --tertiary-container: #94f1fc;
+            --text: #181c1d;
+            --text-light: #41474e;
+            --bg: #f6fafb;
+            --surface: #f6fafb;
+            --surface-container-lowest: #ffffff;
+            --surface-container-low: #f0f4f5;
+            --surface-container: #eaeef0;
+            --surface-container-high: #e5e9ea;
+            --surface-container-highest: #dfe3e4;
+            --outline: #72787f;
+            --outline-variant: #c1c7cf;
+            --success: #166534;
+            --success-bg: #dcfce7;
+            --warning: #b45309;
+            --warning-bg: #fef3c7;
+            --error: #dc2626;
+            --error-bg: #fee2e2;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--bg);
+            min-height: 100vh;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+        }
+
+        .header {
+            background: var(--surface);
+            padding: 0 1.5rem;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            height: 64px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(114, 120, 127, 0.1);
+        }
+
+        .progress-sticky {
+            position: fixed;
+            top: 64px;
+            left: 0;
+            right: 0;
+            z-index: 99;
+            background: var(--surface);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid rgba(114, 120, 127, 0.1);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+
+        .progress-sticky .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .stepper {
+            display: flex;
+            align-items: center;
+            gap: 0;
+            overflow-x: auto;
+        }
+
+        .step-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--outline);
+            white-space: nowrap;
+            padding: 0.25rem 0.5rem;
+            transition: color 0.3s;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .step-item.active {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .step-item.completed {
+            color: var(--success);
+        }
+
+        .step-item .step-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--outline-variant);
+            flex-shrink: 0;
+            transition: background 0.3s;
+        }
+
+        .step-item.active .step-dot {
+            background: var(--primary);
+        }
+
+        .step-item.completed .step-dot {
+            background: var(--success);
+        }
+
+        .step-connector {
+            flex: 1;
+            height: 2px;
+            background: var(--outline-variant);
+            min-width: 20px;
+            max-width: 60px;
+        }
+
+        .step-connector.active {
+            background: var(--primary);
+        }
+
+        .step-connector.completed {
+            background: var(--success);
+        }
+
+        main { margin-top: 120px; padding-bottom: 4rem; }
+
+        .header-brand { display: flex; align-items: center; gap: 0.75rem; }
+        .logo-asimetrix { height: 32px; width: auto; }
+        .header-title { display: flex; align-items: center; gap: 0.5rem; }
+        .header-title .material-symbols-outlined { color: var(--primary); font-size: 24px; }
+        .header-title h1 { font-size: 1rem; font-weight: 700; color: var(--primary); }
+
+        .nav { display: flex; gap: 0.25rem; }
+
+        .nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .nav a:hover { background: rgba(1, 68, 105, 0.08); color: var(--primary); }
+        .nav a.active { background: rgba(1, 68, 105, 0.12); color: var(--primary); font-weight: 600; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+
+        .section { padding: 3rem 1.5rem; }
+        .section-alt { background: var(--surface-container-low); }
+
+        .hero {
+            padding: 2rem 1.5rem 3rem;
+            background: var(--bg);
+        }
+
+        .hero h1 {
+            font-size: 1.75rem;
+            color: var(--text);
+            margin-bottom: 0.75rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+        }
+
+        .hero p {
+            font-size: 1rem;
+            color: var(--text-light);
+            max-width: 600px;
+            line-height: 1.7;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .card {
+            background: var(--surface-container-lowest);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            transition: all 0.3s;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+            border: 1px solid rgba(114, 120, 127, 0.08);
+        }
+
+        .card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transform: translateY(-2px);
+        }
+
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+
+        .card-icon.primary { background: rgba(1, 68, 105, 0.1); }
+        .card-icon.accent { background: rgba(75, 162, 255, 0.1); }
+        .card-icon.aqua { background: rgba(0, 70, 79, 0.1); }
+        .card-icon.success { background: rgba(22, 101, 52, 0.1); }
+        .card-icon.warning { background: rgba(180, 83, 9, 0.1); }
+        .card-icon.error { background: rgba(220, 38, 38, 0.1); }
+
+        .card-icon .material-symbols-outlined { font-size: 24px; }
+        .card-icon.primary .material-symbols-outlined { color: var(--primary); }
+        .card-icon.accent .material-symbols-outlined { color: var(--accent); }
+        .card-icon.aqua .material-symbols-outlined { color: var(--tertiary); }
+        .card-icon.success .material-symbols-outlined { color: var(--success); }
+        .card-icon.warning .material-symbols-outlined { color: var(--warning); }
+        .card-icon.error .material-symbols-outlined { color: var(--error); }
+
+        .card h3 { font-size: 1.125rem; color: var(--text); margin-bottom: 0.5rem; font-weight: 700; }
+        .card p { color: var(--text-light); margin-bottom: 1rem; font-size: 0.9375rem; line-height: 1.6; }
+
+        .step-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .step-card {
+            background: var(--surface-container-lowest);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+            border: 1px solid rgba(114, 120, 127, 0.08);
+            border-top: 4px solid var(--primary-container);
+        }
+
+        .step-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .step-card-number {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--outline);
+            opacity: 0.3;
+            line-height: 1;
+        }
+
+        .step-card-icon .material-symbols-outlined {
+            font-size: 32px;
+            color: var(--primary);
+        }
+
+        .step-card h3 {
+            font-size: 1.125rem;
+            color: var(--text);
+            margin-bottom: 0.5rem;
+        }
+
+        .step-card p {
+            color: var(--text-light);
+            font-size: 0.9375rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .checklist {
+            list-style: none;
+            background: var(--surface-container-high);
+            padding: 1rem;
+            border-radius: 0.75rem;
+        }
+
+        .checklist li {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+            color: var(--text);
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .checklist li:last-child { margin-bottom: 0; }
+        .checklist li .material-symbols-outlined { color: var(--tertiary); font-size: 18px; }
+
+        .message-card {
+            background: var(--surface-container-lowest);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--primary);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+        }
+
+        .message-card.success { border-left-color: var(--success); }
+        .message-card.warning { border-left-color: var(--warning); }
+        .message-card.error { border-left-color: var(--error); }
+
+        .message-card pre {
+            white-space: pre-wrap;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.875rem;
+            line-height: 1.6;
+            color: var(--text-light);
+            margin-top: 0.75rem;
+        }
+
+        .sla-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--surface-container-lowest);
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+        }
+
+        .sla-table th {
+            background: var(--primary);
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .sla-table td {
+            padding: 0.875rem 1rem;
+            border-bottom: 1px solid var(--outline-variant);
+            font-size: 0.875rem;
+            color: var(--text-light);
+        }
+
+        .sla-table tr:last-child td { border-bottom: none; }
+        .sla-table tr:nth-child(even) { background: var(--surface-container-low); }
+
+        .section-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: var(--primary);
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 8px rgba(1, 68, 105, 0.3);
+            margin-bottom: 1rem;
+        }
+
+        .section-label .material-symbols-outlined { font-size: 16px; }
+
+        .info-card {
+            background: rgba(0, 70, 79, 0.1);
+            border: 1px solid rgba(0, 70, 79, 0.2);
+            padding: 1rem;
+            border-radius: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        .info-card h4 {
+            color: var(--tertiary);
+            font-size: 0.875rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .info-card h4 .material-symbols-outlined { font-size: 18px; }
+        .info-card p { color: var(--text-light); font-size: 0.8125rem; line-height: 1.6; }
+
+        .warning-card {
+            background: rgba(234, 179, 8, 0.1);
+            border: 1px solid rgba(234, 179, 8, 0.3);
+            padding: 1rem;
+            border-radius: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        .warning-card h4 {
+            color: #b45309;
+            font-size: 0.875rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .warning-card h4 .material-symbols-outlined { font-size: 18px; }
+        .warning-card ul { list-style: none; }
+        .warning-card li {
+            color: var(--text);
+            font-size: 0.8125rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            gap: 0.5rem;
+        }
+        .warning-card li .material-symbols-outlined { color: #b45309; font-size: 16px; }
+
+        .footer {
+            background: var(--surface-container-low);
+            padding: 2rem 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-brand p {
+            color: var(--text-light);
+            font-size: 0.875rem;
+            margin-top: 0.75rem;
+            line-height: 1.7;
+        }
+
+        .footer h4 {
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text);
+        }
+
+        .footer ul { list-style: none; }
+        .footer li { margin-bottom: 0.5rem; }
+        .footer a { color: var(--text-light); text-decoration: none; font-size: 0.875rem; transition: color 0.2s; }
+        .footer a:hover { color: var(--primary); }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 2rem auto 0;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(114, 120, 127, 0.1);
+            text-align: center;
+        }
+
+        .footer-bottom p { font-size: 0.8125rem; color: var(--text-light); }
+
+        .onix-btn {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            z-index: 50;
+        }
+
+        .onix-btn .btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-container) 100%);
+            color: white;
+            padding: 0.875rem 1.25rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            text-decoration: none;
+            box-shadow: 0 4px 16px rgba(1, 68, 105, 0.3);
+        }
+
+        .onix-btn .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(1, 68, 105, 0.4);
+        }
+
+        .onix-btn .material-symbols-outlined { font-size: 20px; }
+
+        .breadcrumb {
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .breadcrumb a { color: var(--primary); text-decoration: none; font-weight: 500; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .breadcrumb span { color: var(--text-light); }
+        .breadcrumb .material-symbols-outlined { font-size: 16px; }
+
+        @media (max-width: 768px) {
+            .nav { display: none; }
+            .hero h1 { font-size: 1.5rem; }
+            .cards-grid { grid-template-columns: 1fr; }
+            .step-cards-grid { grid-template-columns: 1fr; }
+            .footer-content { grid-template-columns: 1fr; gap: 1.5rem; }
+            .sla-table { display: block; overflow-x: auto; }
+            .stepper { font-size: 0.65rem; }
+            .step-item { padding: 0.25rem 0.25rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-brand">
+            <img src="logo-horizontal.svg" alt="Asimetrix" class="logo-asimetrix">
+        </div>
+        <nav class="nav">
+            <a href="https://asimetrix-hub.vercel.app/" class="active">Hub</a>
+            <a href="#know">know</a>
+            <a href="#do">do</a>
+            <a href="#check">check</a>
+        </nav>
+    </header>
+
+    <!-- Barra de progreso sticky -->
+    <div class="progress-sticky">
+        <div class="container">
+            <div class="stepper">
+                <a href="#know" class="step-item completed" data-step="1">
+                    <div class="step-dot"></div>
+                    <span>1. registro</span>
+                </a>
+                <div class="step-connector completed"></div>
+                <a href="#know" class="step-item active" data-step="2">
+                    <div class="step-dot"></div>
+                    <span>2. proceso etl</span>
+                </a>
+                <div class="step-connector"></div>
+                <a href="#know" class="step-item" data-step="3">
+                    <div class="step-dot"></div>
+                    <span>3. carga</span>
+                </a>
+                <div class="step-connector"></div>
+                <a href="#know" class="step-item" data-step="4">
+                    <div class="step-dot"></div>
+                    <span>4. mensajes</span>
+                </a>
+                <div class="step-connector"></div>
+                <a href="#check" class="step-item" data-step="5">
+                    <div class="step-dot"></div>
+                    <span>5. tiempos</span>
+                </a>
+                <div class="step-connector"></div>
+                <a href="#check" class="step-item" data-step="6">
+                    <div class="step-dot"></div>
+                    <span>6. contacto</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <main>
+        <!-- Hero -->
+        <section class="hero">
+            <div class="container">
+                <a href="https://asimetrix-hub.vercel.app/" style="display: inline-flex; align-items: center; gap: 0.5rem; color: var(--primary); font-size: 0.875rem; font-weight: 500; text-decoration: none; margin-bottom: 1rem;">
+                    <span class="material-symbols-outlined" style="font-size: 18px;">arrow_back</span>
+                    volver al hub
+                </a>
+                <br>
+                <span class="section-label"><span class="material-symbols-outlined">school</span> onboarding</span>
+                <h1>Onboarding carga de archivos etl</h1>
+                <p>Guía completa para el registro, carga de archivos y gestión de procesos etl en la plataforma Asimetrix.</p>
+            </div>
+        </section>
+
+        <!-- Know section -->
+        <section id="know" class="section">
+            <div class="container">
+                <span class="section-label"><span class="material-symbols-outlined">menu_book</span> know</span>
+                <h2 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 1.5rem;">Conoce la plataforma</h2>
+
+                <!-- Tutorial registro -->
+                <div class="step-cards-grid" style="margin-bottom: 3rem;">
+                    <div class="step-card">
+                        <div class="step-card-header">
+                            <div class="step-card-number">1</div>
+                            <div class="step-card-icon"><span class="material-symbols-outlined">person_add</span></div>
+                        </div>
+                        <h3>Tutorial registro</h3>
+                        <p>Aprende a crear tu cuenta y acceder a la sesión de tu empresa:</p>
+                        <ul class="checklist">
+                            <li><span class="material-symbols-outlined">check_circle</span> Ingresa a la url de la plataforma</li>
+                            <li><span class="material-symbols-outlined">check_circle</span> Usa las credenciales proporcionadas por Asimetrix</li>
+                            <li><span class="material-symbols-outlined">check_circle</span> Verifica tu correo electrónico</li>
+                            <li><span class="material-symbols-outlined">check_circle</span> Configura tu perfil de usuario</li>
+                        </ul>
+                        <div class="info-card">
+                            <h4><span class="material-symbols-outlined">info</span> Nota</h4>
+                            <p>El registro es gestionado por el equipo de Asimetrix. No se permite registro público.</p>
+                        </div>
+                    </div>
+
+                    <!-- Proceso etl -->
+                    <div class="step-card">
+                        <div class="step-card-header">
+                            <div class="step-card-number">2</div>
+                            <div class="step-card-icon"><span class="material-symbols-outlined">settings</span></div>
+                        </div>
+                        <h3>Proceso etl y flujo</h3>
+                        <p>El proceso de automatización y carga de datos sigue estos pasos:</p>
+                        <ul class="checklist">
+                            <li><span class="material-symbols-outlined">check_circle</span> Automatización de fuente de información (Excel cliente/captura/genética)</li>
+                            <li><span class="material-symbols-outlined">check_circle</span> Tiempo máximo: 10 días hábiles</li>
+                            <li><span class="material-symbols-outlined">check_circle</span> Construcción paralela de modelo de visualización</li>
+                            <li><span class="material-symbols-outlined">check_circle</span> Carga de archivo al filemanager designado</li>
+                            <li><span class="material-symbols-outlined">check_circle</span> Recepción de correo con resultado del proceso</li>
+                        </ul>
+                        <div class="warning-card">
+                            <h4><span class="material-symbols-outlined">schedule</span> Actualización de datos</h4>
+                            <li><span class="material-symbols-outlined">info</span> Si el proceso es exitoso, los datos se reflejan en el modelo en la siguiente hora de actualización</li>
+                            <li><span class="material-symbols-outlined">info</span> Las actualizaciones inician cada hora a partir de las 5:15 a.m.</li>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Carga de archivos -->
+                <div class="step-cards-grid" style="margin-bottom: 3rem;">
+                    <div class="step-card">
+                        <div class="step-card-header">
+                            <div class="step-card-number">3</div>
+                            <div class="step-card-icon"><span class="material-symbols-outlined">upload_file</span></div>
+                        </div>
+                        <h3>Carga de archivos a la etl</h3>
+                        <p>Pasos para subir tus archivos correctamente:</p>
+                        <ul class="checklist">
+                            <li><span class="material-symbols-outlined">check_circle</span> Accede a la sesión de tu empresa</li>
+                            <li><span class="material-symbols-outlined">check_circle</span> Dirígete a la sección de filemanager</li>
+                            <li><span class="material-symbols-outlined">check_circle</span> Selecciona la ruta designada para tu archivo</li>
+                            <li><span class="material-symbols-outlined">check_circle</span> Arrastra o busca el archivo Excel (.xlsx)</li>
+                            <li><span class="material-symbols-outlined">check_circle</span> Confirma la carga y espera el correo de respuesta</li>
+                        </ul>
+                        <div class="info-card">
+                            <h4><span class="material-symbols-outlined">info</span> Formatos aceptados</h4>
+                            <p>Solo archivos Excel (.xlsx) originados de tu software de captura o casa genética. No se aceptan otros formatos.</p>
+                        </div>
+                    </div>
+
+                    <!-- Tutoriales generales -->
+                    <div class="step-card">
+                        <div class="step-card-header">
+                            <div class="step-card-number">4</div>
+                            <div class="step-card-icon"><span class="material-symbols-outlined">menu_book</span></div>
+                        </div>
+                        <h3>Tutoriales generales</h3>
+                        <p>Accede a la base de conocimiento con tutoriales detallados sobre la plataforma, PigKnows, Agriness y Porcitec.</p>
+                        <a href="tutoriales.html" style="display: inline-flex; align-items: center; gap: 0.5rem; background: var(--primary); color: white; padding: 0.75rem 1.25rem; border-radius: 0.75rem; font-weight: 600; font-size: 0.875rem; text-decoration: none; margin-top: 0.5rem; transition: all 0.2s;">
+                            Ir a tutoriales
+                            <span class="material-symbols-outlined">arrow_forward</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Interpretación de mensajes ETL -->
+                <h3 style="font-size: 1.25rem; font-weight: 800; margin-bottom: 1.5rem;">Qué dice el correo que recibes</h3>
+                <p style="color: var(--text-light); margin-bottom: 1.5rem;">Después de cargar tu archivo te llegará un correo. Aquí te explicamos qué hacer en cada caso:</p>
+
+                <!-- Exitoso -->
+                <div class="message-card success">
+                    <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem;">
+                        <span class="material-symbols-outlined" style="color: var(--success); font-size: 48px;">check_circle</span>
+                        <div>
+                            <h4 style="font-size: 1.25rem; font-weight: 800; color: var(--success); margin-bottom: 0.25rem;">¡Todo bien! ✅</h4>
+                            <p style="font-size: 0.875rem; color: var(--text-light);">Tu archivo se cargó correctamente</p>
+                        </div>
+                    </div>
+                    <div style="background: var(--success-bg); padding: 1rem; border-radius: 0.75rem; margin-top: 0.5rem;">
+                        <p style="font-size: 0.9375rem; color: var(--success); font-weight: 600; margin-bottom: 0.5rem;">📧 El correo dirá:</p>
+                        <pre style="font-size: 0.875rem; color: var(--text);">“Hola!
+El proceso de ETL para el archivo S4 - KAREN RENDON - ANTIOQUIA – LAS CACHAMERAS CEBA - 2.025.xlsx se ejecutó de manera exitosa con 2 registros insertados y 0 registros actualizados”</pre>
+                    </div>
+                    <div class="info-card" style="margin-top: 1rem;">
+                        <h4><span class="material-symbols-outlined">task_alt</span> ¿Qué haces?</h4>
+                        <ul class="checklist" style="background: transparent; padding: 0;">
+                            <li style="font-size: 0.9375rem;"><span class="material-symbols-outlined">check_circle</span> ¡Nada! Ya todo está bien 😊</li>
+                            <li style="font-size: 0.9375rem;"><span class="material-symbols-outlined">check_circle</span> Entra a la plataforma y revisa que tus datos aparezcan</li>
+                            <li style="font-size: 0.9375rem;"><span class="material-symbols-outlined">check_circle</span> Los datos se actualizan cada hora desde las 5:15 a.m.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Observaciones -->
+                <div class="message-card warning">
+                    <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem;">
+                        <span class="material-symbols-outlined" style="color: var(--warning); font-size: 48px;">warning</span>
+                        <div>
+                            <h4 style="font-size: 1.25rem; font-weight: 800; color: var(--warning); margin-bottom: 0.25rem;">Ojo, hay datos raros ⚠️</h4>
+                            <p style="font-size: 0.875rem; color: var(--text-light);">El archivo cargó pero tiene errores</p>
+                        </div>
+                    </div>
+                    <div style="background: var(--warning-bg); padding: 1rem; border-radius: 0.75rem; margin-top: 0.5rem;">
+                        <p style="font-size: 0.9375rem; color: var(--warning); font-weight: 600; margin-bottom: 0.5rem;">📧 El correo dirá (mensaje completo):</p>
+                        <pre style="font-size: 0.8125rem; color: var(--text);">“Hola!
+El proceso de ETL para el archivo S4 - KAREN RENDON - ANTIOQUIA – LAS CACHAMERAS CEBA - 2.025.xlsx se ejecutó de manera exitosa con 2 registros insertados y 0 registros actualizados”
+•	En la columna edadPromedioInicial se encontró 1 registro con el valor de 113.55 el cual está por fuera del rango aceptado (15 - 55). (requerido)
+•	En la columna edadPromedioFinal se encontraron 2 registros con los valores 41.09 y 156.55 los cuales están por fuera del rango aceptado (45 - 125). Estos datos pertenecen a los lotes 012023A y 052023B. (requerido)
+•	Para la columna conversionAlimenticia, se encontraron 12 registros por fuera del valor calculado con la siguiente fórmula: consumoAnimalDiaG / gananciaAnimalDiaG. Estos datos corresponden a los lotes 072023-A, 092023-B, 152023-A, 132023-B, 132023-A, 152023-B, 172023-A, 162023, 182023, 202023, 222023 y 242023. (requerido)</pre>
+                    </div>
+                    <div class="warning-card" style="margin-top: 1rem;">
+                        <h4><span class="material-symbols-outlined">build</span> ¿Qué haces?</h4>
+                        <ul class="checklist" style="background: transparent; padding: 0;">
+                            <li style="font-size: 0.9375rem;"><span class="material-symbols-outlined">radio_button_checked</span> Abre tu archivo de Excel</li>
+                            <li style="font-size: 0.9375rem;"><span class="material-symbols-outlined">radio_button_checked</span> Busca los números o nombres que te marcaron en el correo</li>
+                            <li style="font-size: 0.9375rem;"><span class="material-symbols-outlined">radio_button_checked</span> Corrige esos datos (ej: si dice "edad fuera de rango 15-55", pon un número entre 15 y 55)</li>
+                            <li style="font-size: 0.9375rem;"><span class="material-symbols-outlined">radio_button_checked</span> Guarda el archivo y súbelo otra vez</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Fallidos -->
+                <div class="message-card error">
+                    <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem;">
+                        <span class="material-symbols-outlined" style="color: var(--error); font-size: 48px;">error</span>
+                        <div>
+                            <h4 style="font-size: 1.25rem; font-weight: 800; color: var(--error); margin-bottom: 0.25rem;">¡No funcionó! ❌</h4>
+                            <p style="font-size: 0.875rem; color: var(--text-light);">El archivo no se pudo cargar</p>
+                        </div>
+                    </div>
+                    <div style="background: var(--error-bg); padding: 1rem; border-radius: 0.75rem; margin-top: 0.5rem;">
+                        <p style="font-size: 0.9375rem; color: var(--error); font-weight: 600; margin-bottom: 0.75rem;">📧 El correo dice "falló" y estos son los casos:</p>
+
+                        <!-- Caso 1: Empresa nueva -->
+                        <div style="background: white; padding: 1rem; border-radius: 0.5rem; margin-bottom: 0.75rem;">
+                            <h5 style="font-size: 0.9375rem; font-weight: 700; color: var(--error); margin-bottom: 0.5rem;">Caso 1: Empresa o granja nueva</h5>
+                            <pre style="font-size: 0.8125rem; color: var(--text); margin-bottom: 0.5rem;">Hola!
+
+El proceso de ETL para el archivo S4 - JUAN FONSECA - VALLE - BUGA - PRIMERIZAS - 2025 EDESMA.xlsx falló debido a que:
+•	No se encontró información de metadata para 7 registros con la siguiente combinacion de origenDatos, empresa y granja: "Contegral - Goloso Del Valle - Ledesma". (requerido)
+•	No se encuentra la columna lineaGeneticaMadre2 requerida para la limpieza de lineaGeneticaMadre. (requerido)
+•	No se encuentra la columna lineaGeneticaPadre2 requerida para la limpieza de lineaGeneticaPadre. (requerido)
+•	No se encuentra la columna proveedorNutricionalDetallado1 requerida para la limpieza de proveedorNutricional. (requerido)
+•	No se encontraron las columnas requeridas lineaGenetica2, proveedorNutricional2, pais, departamento y municipio. (requerido)</pre>
+                            <div style="background: var(--surface-container-high); padding: 0.75rem; border-radius: 0.5rem;">
+                                <p style="font-size: 0.875rem; color: var(--text); font-weight: 600; margin-bottom: 0.5rem;">📞 ¿Qué haces?</p>
+                                <ul style="list-style: none; padding: 0;">
+                                    <li style="font-size: 0.8125rem; color: var(--text); margin-bottom: 0.25rem;">✅ ¡No subas nada! Esto no es error tuyo</li>
+                                    <li style="font-size: 0.8125rem; color: var(--text); margin-bottom: 0.25rem;">✅ Llama a Asimetrix: <strong style="color: var(--primary);">3053907711</strong></li>
+                                    <li style="font-size: 0.8125rem; color: var(--text);">✅ Diles: "Mi granja es nueva, no me deja subir archivos"</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Caso 2: Sin información -->
+                        <div style="background: white; padding: 1rem; border-radius: 0.5rem; margin-bottom: 0.75rem;">
+                            <h5 style="font-size: 0.9375rem; font-weight: 700; color: var(--error); margin-bottom: 0.5rem;">Caso 2: No hay información o archivo mal estructurado</h5>
+                            <pre style="font-size: 0.8125rem; color: var(--text); margin-bottom: 0.5rem;">NO HAY INFORMACION EN EL ARCHIVO O ESTA MALA
+Hola!
+
+El proceso de ETL para el archivo S4 - KAREN RENDON - ANTIOQUIA - LAS CACHAMERAS - 2025.xlsx falló debido a que no se detectó mapping activo para la carpeta seleccionada.</pre>
+                            <div style="background: var(--surface-container-high); padding: 0.75rem; border-radius: 0.5rem;">
+                                <p style="font-size: 0.875rem; color: var(--text); font-weight: 600; margin-bottom: 0.5rem;">🔧 ¿Qué haces?</p>
+                                <ul style="list-style: none; padding: 0;">
+                                    <li style="font-size: 0.8125rem; color: var(--text); margin-bottom: 0.25rem;">✅ Abre tu archivo de Excel</li>
+                                    <li style="font-size: 0.8125rem; color: var(--text); margin-bottom: 0.25rem;">✅ Revisa que tenga información adentro (filas con datos)</li>
+                                    <li style="font-size: 0.8125rem; color: var(--text); margin-bottom: 0.25rem;">✅ Asegúrate que las columnas tengan nombre (ej: "edad", "peso", "fecha")</li>
+                                    <li style="font-size: 0.8125rem; color: var(--text);">✅ Guarda y súbelo otra vez</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Caso 3: Faltan llaves -->
+                        <div style="background: white; padding: 1rem; border-radius: 0.5rem;">
+                            <h5 style="font-size: 0.9375rem; font-weight: 700; color: var(--error); margin-bottom: 0.5rem;">Caso 3: Faltan llaves únicas obligatorias</h5>
+                            <pre style="font-size: 0.8125rem; color: var(--text); margin-bottom: 0.5rem;">FALTAN LLAVES ÚNICAS OBLIGATORIAS
+Hola!	
+
+El proceso de ETL para el archivo POSTURA-FINCA AVICOLA LEAL REY LOTE 12.xlsx se ejecutó con las siguientes observaciones:
+1.	No se pudieron procesar los datos de producción ponedoras debido a que se encontraron valores nulos para las columnas noGalpon y consumoAcumuladoG las cuales no permiten este tipo de dato. 
+2.	Se procesaron exitosamente los datos de levante ponedoras con 2 registros insertados y 0 registros actualizados en la tabla performance_layergrower en Aurora. Es importante tener en cuenta que no se cargó toda la información debido a que para la siguiente combinación de empresa, granja, idLote y noGalpon: "Avicola Leal Rey - El Recuerdo - 12 - Y-Z" se encontraron 15 registros sin la edad minima requerida, semana 1.
+
+3.	No se pudieron procesar los datos de ponedoras clasificacion huevo debido a que se encontraron datos nulos para la key noGalpon.</pre>
+                            <div style="background: var(--surface-container-high); padding: 0.75rem; border-radius: 0.5rem;">
+                                <p style="font-size: 0.875rem; color: var(--text); font-weight: 600; margin-bottom: 0.5rem;">🔧 ¿Qué haces?</p>
+                                <ul style="list-style: none; padding: 0;">
+                                    <li style="font-size: 0.8125rem; color: var(--text); margin-bottom: 0.25rem;">✅ Revisa qué columnas faltan (te las dice el correo)</li>
+                                    <li style="font-size: 0.8125rem; color: var(--text); margin-bottom: 0.25rem;">✅ Pídele al que llena el archivo que las agregue</li>
+                                    <li style="font-size: 0.8125rem; color: var(--text); margin-bottom: 0.25rem;">✅ Columnas comunes que piden: pais, departamento, municipio, tipo de genética</li>
+                                    <li style="font-size: 0.8125rem; color: var(--text);">✅ Guarda y súbelo otra vez</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Qué hacer siempre -->
+                <div class="info-card" style="margin-top: 1.5rem;">
+                    <h4><span class="material-symbols-outlined">repeat</span> Si algo falla, haz esto:</h4>
+                    <ul class="checklist" style="background: transparent; padding: 0;">
+                        <li style="font-size: 0.9375rem;"><span class="material-symbols-outlined">looks_one</span> Lee el correo que te llegó de Asimetrix</li>
+                        <li style="font-size: 0.9375rem;"><span class="material-symbols-outlined">looks_two</span> Abre tu archivo de Excel y corrige lo que te marcaron</li>
+                        <li style="font-size: 0.9375rem;"><span class="material-symbols-outlined">looks_3</span> Guarda el archivo con el mismo nombre</li>
+                        <li style="font-size: 0.9375rem;"><span class="material-symbols-outlined">looks_4</span> Súbelo otra vez a la misma carpeta</li>
+                        <li style="font-size: 0.9375rem;"><span class="material-symbols-outlined">looks_5</span> Espera el nuevo correo (tarda máximo 2 días hábiles)</li>
+                    </ul>
+                </div>
+                    </div>
+                    <div style="background: var(--success-bg); padding: 1rem; border-radius: 0.75rem; margin-top: 0.5rem;">
+                        <p style="font-size: 0.9375rem; color: var(--success); font-weight: 600; margin-bottom: 0.5rem;">📧 El correo dirá:</p>
+                        <p style="font-style: italic; color: var(--text);">"se ejecutó de manera exitosa con X registros insertados"</p>
+                    </div>
+                    <div class="info-card" style="margin-top: 1rem;">
+                        <h4><span class="material-symbols-outlined">task_alt</span> ¿Qué haces?</h4>
+                        <ul class="checklist" style="background: transparent; padding: 0;">
+                            <li style="font-size: 0.9375rem;"><span class="material-symbols-outlined">check_circle</span> ¡Nada! Ya todo está bien 😊</li>
+                            <li style="font-size: 0.9375rem;"><span class="material-symbols-outlined">check_circle</span> Entra a la plataforma y revisa que tus datos aparezcan</li>
+                            <li style="font-size: 0.9375rem;"><span class="material-symbols-outlined">check_circle</span> Los datos se actualizan cada hora desde las 5:15 a.m.</li>
+                        </ul>
+                    </div>
+                </div>
+
+        </section>
+
+        <!-- Do section -->
+        <section id="do" class="section section-alt">
+            <div class="container">
+                <span class="section-label"><span class="material-symbols-outlined">touch_app</span> do</span>
+                <h2 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 1.5rem;">Ponlo en práctica</h2>
+                <p style="color: var(--text-light); max-width: 600px; margin-bottom: 2rem;">Sigue esta checklist para completar tu primera carga de archivos:</p>
+
+                <div class="card" style="max-width: 800px;">
+                    <div class="card-icon accent">
+                        <span class="material-symbols-outlined">fact_check</span>
+                    </div>
+                    <h3>Checklist de primera carga</h3>
+                    <ul class="checklist">
+                        <li><span class="material-symbols-outlined">radio_button_unchecked</span> Verifica que tu archivo sea .xlsx y cumpla con el formato requerido</li>
+                        <li><span class="material-symbols-outlined">radio_button_unchecked</span> Accede a tu sesión con las credenciales proporcionadas</li>
+                        <li><span class="material-symbols-outlined">radio_button_unchecked</span> Navega a la sección de filemanager</li>
+                        <li><span class="material-symbols-outlined">radio_button_unchecked</span> Selecciona la ruta correspondiente a tu empresa/granja</li>
+                        <li><span class="material-symbols-outlined">radio_button_unchecked</span> Arrastra o selecciona tu archivo Excel</li>
+                        <li><span class="material-symbols-outlined">radio_button_unchecked</span> Confirma la carga y guarda el comprobante</li>
+                        <li><span class="material-symbols-outlined">radio_button_unchecked</span> Revisa tu correo en las próximas horas para el resultado</li>
+                    </ul>
+                    <div class="warning-card">
+                        <h4><span class="material-symbols-outlined">warning</span> Importante</h4>
+                        <li><span class="material-symbols-outlined">info</span> No subas el mismo archivo dos veces sin corregir errores primero</li>
+                        <li><span class="material-symbols-outlined">info</span> Verifica que los nombres de columnas coincidan con el mapeo de tu empresa</li>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Check section -->
+        <section id="check" class="section">
+            <div class="container">
+                <span class="section-label"><span class="material-symbols-outlined">verified</span> check</span>
+                <h2 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 1.5rem;">Verifica y contacta</h2>
+
+                <!-- SLA -->
+                <div style="margin-bottom: 3rem;">
+                    <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem;">Tiempos de respuesta (SLA)</h3>
+                    <p style="color: var(--text-light); margin-bottom: 1.5rem;">Niveles de servicio en la plataforma (tiempos máximos de respuesta):</p>
+                    <table class="sla-table">
+                        <thead>
+                            <tr>
+                                <th>Concepto</th>
+                                <th>Tiempo máximo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Horario de atención</td>
+                                <td>Lunes a viernes 8 a.m. - 5 p.m. (no incluye festivos)</td>
+                            </tr>
+                            <tr>
+                                <td>Tiempo de respuesta telefónica</td>
+                                <td>120 minutos</td>
+                            </tr>
+                            <tr>
+                                <td>Caídas de la plataforma web</td>
+                                <td>1 día hábil</td>
+                            </tr>
+                            <tr>
+                                <td>Nuevos formatos o adaptación de formatos existentes</td>
+                                <td>10 días hábiles</td>
+                            </tr>
+                            <tr>
+                                <td>Creación de códigos, creación de carpetas</td>
+                                <td>2 días hábiles</td>
+                            </tr>
+                            <tr>
+                                <td>Cambio de claves, asignación de permisos a usuarios nuevos</td>
+                                <td>1 día hábil</td>
+                            </tr>
+                            <tr>
+                                <td>Nuevos gráficos o análisis en los modelos de visualización existentes</td>
+                                <td>10 días hábiles</td>
+                            </tr>
+                            <tr>
+                                <td>Asignación de nuevas licencias</td>
+                                <td>3 días hábiles</td>
+                            </tr>
+                            <tr>
+                                <td>Apoyo en corrección de datos</td>
+                                <td>2 días hábiles</td>
+                            </tr>
+                            <tr>
+                                <td>Nuevos modelos de visualización</td>
+                                <td>20 días hábiles</td>
+                            </tr>
+                            <tr>
+                                <td>Tiempo mínimo de preaviso por mantenimiento (Asimetrix)</td>
+                                <td>48 horas</td>
+                            </tr>
+                            <tr>
+                                <td>Máxima ventana de mantenimiento</td>
+                                <td>4 horas no laborales</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Canal de comunicación -->
+                <div>
+                    <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem;">Canal de comunicación</h3>
+                    <p style="color: var(--text-light); margin-bottom: 1.5rem;">Contacta al equipo de soporte a través de estos medios oficiales:</p>
+
+                    <div class="cards-grid">
+                        <div class="card">
+                            <div class="card-icon primary">
+                                <span class="material-symbols-outlined">mail</span>
+                            </div>
+                            <h3>Correos electrónicos</h3>
+                            <p>Envía tus solicitudes formalmente a:</p>
+                            <ul class="checklist">
+                                <li><span class="material-symbols-outlined">mark_email_read</span> sebastian.ramirez@asimetrix.com</li>
+                                <li><span class="material-symbols-outlined">mark_email_read</span> @asimetrix.com</li>
+                            </ul>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-icon accent">
+                                <span class="material-symbols-outlined">phone</span>
+                            </div>
+                            <h3>Teléfonos de contacto</h3>
+                            <p>Horario: lunes a viernes 8 a.m. - 5 p.m.</p>
+                            <ul class="checklist">
+                                <li><span class="material-symbols-outlined">smartphone</span> Línea móvil: 3053907711</li>
+                                <li><span class="material-symbols-outlined">phone_in_talk</span> Línea fija: (604) 6041500</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <img src="logo-horizontal.svg" alt="Asimetrix" style="height: 28px; width: auto;">
+                <p>Monitoreo inteligente para tu producción. Cámaras inteligentes, sensores y herramientas de IA que transforman datos en rentabilidad.</p>
+            </div>
+            <div>
+                <h4>onboarding</h4>
+                <ul>
+                    <li><a href="#know">know</a></li>
+                    <li><a href="#do">do</a></li>
+                    <li><a href="#check">check</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>soporte</h4>
+                <ul>
+                    <li><a href="mailto:sebastian.ramirez@asimetrix.com">sebastian.ramirez@asimetrix.com</a></li>
+                    <li><a href="tel:3053907711">3053907711</a></li>
+                    <li><a href="tel:6046041500">(604) 6041500</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Asimetrix - monitoreo inteligente para tu producción</p>
+        </div>
+    </footer>
+
+    <!-- Onix button -->
+    <div class="onix-btn">
+        <a href="https://onix.asimetrix.co/" target="_blank" class="btn">
+            <span class="material-symbols-outlined">chat</span>
+            ¡Soy Onix! Hablemos
+        </a>
+    </div>
+
+    <script>
+        // Actualizar barra de progreso al hacer scroll
+        window.addEventListener('scroll', updateStepper);
+
+        function updateStepper() {
+            const sections = ['know', 'do', 'check'];
+            const stepperItems = document.querySelectorAll('.step-item');
+            const connectors = document.querySelectorAll('.step-connector');
+            
+            let currentSection = 'know';
+            const scrollPos = window.scrollY + 200;
+
+            sections.forEach(id => {
+                const section = document.getElementById(id);
+                if (section && section.offsetTop <= scrollPos) {
+                    currentSection = id;
+                }
+            });
+
+            // Actualizar estado de los pasos
+            stepperItems.forEach((item, index) => {
+                item.classList.remove('active', 'completed');
+                const stepNum = parseInt(item.dataset.step);
+                
+                if (currentSection === 'know' && stepNum <= 4) {
+                    if (stepNum < 2) {
+                        item.classList.add('completed');
+                    } else if (stepNum === 2) {
+                        item.classList.add('active');
+                    }
+                } else if (currentSection === 'do' && stepNum <= 4) {
+                    item.classList.add('completed');
+                } else if (currentSection === 'check') {
+                    if (stepNum <= 5) {
+                        item.classList.add('completed');
+                    } else if (stepNum === 6) {
+                        item.classList.add('active');
+                    }
+                }
+            });
+
+            // Actualizar conectores
+            connectors.forEach((connector, index) => {
+                connector.classList.remove('active', 'completed');
+                if (currentSection === 'know' && index < 1) {
+                    connector.classList.add('completed');
+                } else if (currentSection === 'do' && index < 3) {
+                    connector.classList.add('completed');
+                } else if (currentSection === 'check') {
+                    if (index < 4) {
+                        connector.classList.add('completed');
+                    }
+                }
+            });
+        }
+
+        // Scroll suave para enlaces
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Inicializar
+        updateStepper();
+    </script>
+</body>
+</html>
