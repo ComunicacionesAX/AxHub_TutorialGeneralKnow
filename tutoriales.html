@@ -47,13 +47,46 @@
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
 
+        .header {
+            background: var(--surface);
+            padding: 0 1.5rem;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 200;
+            height: 64px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(114, 120, 127, 0.1);
+        }
+
+        .header-brand { display: flex; align-items: center; gap: 0.75rem; }
+        .logo-asimetrix { height: 32px; width: auto; }
+
+        .nav { display: flex; gap: 0.25rem; }
+
+        .nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .nav a:hover { background: rgba(1, 68, 105, 0.08); color: var(--primary); }
+        .nav a.active { background: rgba(1, 68, 105, 0.12); color: var(--primary); font-weight: 600; }
+
         /* Sidebar */
         .sidebar {
             width: var(--sidebar-width);
             background: var(--sidebar-bg);
             color: var(--sidebar-text);
             position: fixed;
-            top: 0;
+            top: 64px;
             left: 0;
             bottom: 0;
             overflow-y: auto;
@@ -207,7 +240,7 @@
         .main {
             margin-left: var(--sidebar-width);
             flex: 1;
-            padding: 2.5rem 3rem;
+            padding: 5.5rem 3rem 2.5rem;
             min-height: 100vh;
         }
 
@@ -366,10 +399,12 @@
         }
 
         @media (max-width: 768px) {
+            .header { display: none; }
             .sidebar {
                 width: 100%;
                 position: relative;
                 height: auto;
+                top: 0;
             }
             .main {
                 margin-left: 0;
@@ -382,6 +417,18 @@
     </style>
 </head>
 <body>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-brand">
+            <img src="logo-horizontal.svg" alt="Asimetrix" class="logo-asimetrix">
+        </div>
+        <nav class="nav">
+            <a href="https://asimetrix-hub.vercel.app/">Hub</a>
+            <a href="onboarding%20(1).html" class="active">Onboarding</a>
+            <a href="tutoriales.html">Tutoriales</a>
+        </nav>
+    </header>
 
     <!-- Sidebar -->
     <aside class="sidebar">
@@ -502,22 +549,16 @@
     <!-- Main content -->
     <main class="main">
         <div class="main-header">
-            <div class="breadcrumb">
-                <a href="onboarding%20(1).html">Onboarding</a>
-                <span class="material-symbols-outlined" style="font-size: 14px; vertical-align: middle;">chevron_right</span>
-                Tutoriales
-            </div>
+            <a href="onboarding%20(1).html" style="display: inline-flex; align-items: center; gap: 0.5rem; color: var(--primary); font-size: 0.875rem; font-weight: 500; text-decoration: none; margin-bottom: 1rem;">
+                <span class="material-symbols-outlined" style="font-size: 18px;">arrow_back</span>
+                volver al onboarding
+            </a>
             <h1 id="main-title">Tutoriales generales</h1>
             <p id="main-description">Selecciona un tutorial del menú lateral para comenzar.</p>
         </div>
 
-        <div class="tutorial-content" id="tutorial-content">
-            <div class="empty-state">
-                <span class="material-symbols-outlined">menu_book</span>
-                <h3>Selecciona un tutorial</h3>
-                <p>Elige un tema del menú lateral izquierdo para ver su contenido.</p>
+            <div class="tutorial-content" id="tutorial-content">
             </div>
-        </div>
     </main>
 
     <script>
@@ -928,12 +969,14 @@
             document.getElementById('tutorial-content').innerHTML = data.content;
         }
 
-        // Auto-open tutorial from URL parameter
+        // Auto-open tutorial from URL parameter or default to first
         window.addEventListener('DOMContentLoaded', function() {
             const params = new URLSearchParams(window.location.search);
             const tutorialParam = params.get('tutorial');
             if (tutorialParam && tutorials.plataforma[tutorialParam]) {
                 openTutorial('plataforma', tutorialParam);
+            } else {
+                openTutorial('plataforma', 'bienvenido');
             }
         });
     </script>
