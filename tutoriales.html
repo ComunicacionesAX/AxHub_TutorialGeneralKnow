@@ -1156,10 +1156,9 @@
 
         function openIframe(event, url, title, description) {
             document.querySelectorAll('.nav-link, .nav-simple-link').forEach(el => el.classList.remove('active'));
-            const btn = event.target.closest('.nav-link, .nav-simple-link');
+            const btn = event && event.target ? event.target.closest('.nav-link, .nav-simple-link') : null;
             if (btn) btn.classList.add('active');
             document.getElementById('main-title').textContent = title || 'Tutorial';
-            document.getElementById('main-description').textContent = description || '';
             document.getElementById('tutorial-content').innerHTML = '<iframe src="' + url + '" style="width:100%;height:80vh;border:none;border-radius:0.5rem;"></iframe>';
         }
 
@@ -1170,7 +1169,6 @@
             const data = tutorials[section][tutorialId];
             if (!data) return;
             document.getElementById('main-title').textContent = data.title;
-            document.getElementById('main-description').textContent = data.description;
             document.getElementById('tutorial-content').innerHTML = data.content;
         }
 
@@ -1185,9 +1183,13 @@
             const data = simpleSections[id];
             if (!data) return;
             document.getElementById('main-title').textContent = data.title;
-            document.getElementById('main-description').textContent = data.description;
             document.getElementById('tutorial-content').innerHTML = data.content;
         }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const firstLink = document.querySelector('.nav-link');
+            if (firstLink) firstLink.click();
+        });
     </script>
 
 </body>
