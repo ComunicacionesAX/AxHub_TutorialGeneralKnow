@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cambia la variable por defecto | Asimetrix</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #014469;
+            --primary-dark: #001a2e;
+            --primary-container: #275c82;
+            --accent: #4BA2FF;
+            --text: #181c1d;
+            --text-light: #41474e;
+            --bg: #f6fafb;
+            --surface: #ffffff;
+            --outline: #72787f;
+            --outline-variant: #c1c7cf;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--bg);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            padding: 3rem 1.5rem;
+        }
+        .container {
+            max-width: 720px;
+            width: 100%;
+        }
+        .step {
+            background: var(--surface);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+            border: 1px solid rgba(114, 120, 127, 0.08);
+        }
+        .step-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+        .step-num {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            min-width: 32px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: #fff;
+            font-size: 0.875rem;
+            font-weight: 700;
+        }
+        .step-header p {
+            font-weight: 500;
+            color: var(--text);
+        }
+        .step img {
+            width: 100%;
+            max-width: 600px;
+            border-radius: 0.5rem;
+            border: 1px solid var(--outline-variant);
+            display: block;
+            margin: 0 auto;
+        }
+        .tip {
+            background: rgba(1, 68, 105, 0.08);
+            border-left: 4px solid var(--primary);
+            padding: 1rem 1.25rem;
+            border-radius: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        .tip p {
+            font-size: 0.875rem;
+            color: var(--text-light);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <div class="step">
+            <div class="step-header">
+                <span class="step-num">1</span>
+                <p>En el caso de que un cliente que seleccionaste no tenga información de la variable productiva en la que se encuentra filtrado el grafico, te va aparecer el grafico en blanco. Estos son los pasos a seguir para que puedas seguir revisando los datos de tu cliente:</p>
+            </div>
+            <img src="https://colony-recorder.s3.amazonaws.com/files/2024-04-19/5264d722-5d20-4672-87d6-e9ab7d980ad0/ascreenshot_b384009036674c80a85fc32378f38730_text_export.jpeg" alt="Paso 1: Gráfico en blanco">
+        </div>
+
+        <div class="step">
+            <div class="step-header">
+                <span class="step-num">2</span>
+                <p>Haz click derecho sobre el grafico y selecciona "Gráfico de líneas"</p>
+            </div>
+            <img src="https://colony-recorder.s3.amazonaws.com/files/2024-04-19/3f62a1a4-2fe1-4d9b-8bf6-dbf6cf02c1ef/ascreenshot_76454b429b824af5b3bc6f0839bc5401_text_export.jpeg" alt="Paso 2: Gráfico de líneas">
+        </div>
+
+        <div class="step">
+            <div class="step-header">
+                <span class="step-num">3</span>
+                <p>Haz click en "Menú de exploración"</p>
+            </div>
+            <img src="https://colony-recorder.s3.amazonaws.com/files/2024-04-19/d356eb56-437d-457b-bd8c-e2df8650f5da/ascreenshot_cf78e15f55754c739bd3ec04a91c4993_text_export.jpeg" alt="Paso 3: Menú de exploración">
+        </div>
+
+        <div class="step">
+            <div class="step-header">
+                <span class="step-num">4</span>
+                <p>y luego click en "Medidas"</p>
+            </div>
+            <img src="https://colony-recorder.s3.amazonaws.com/files/2024-04-19/53b9b58e-0758-40aa-b0fb-1272174ae1af/ascreenshot_39a74912a48043b9821c20d94e0da948_text_export.jpeg" alt="Paso 4: Medidas">
+        </div>
+
+        <div class="step">
+            <div class="step-header">
+                <span class="step-num">5</span>
+                <p>Te van aparecer todas las variables productivas que tenemos disponibles, haz click en una variable diferente a la ya seleccionada.</p>
+            </div>
+            <img src="https://colony-recorder.s3.amazonaws.com/files/2024-04-19/5d5ba3d5-3c95-4c9d-9ea1-331fcf07b09b/ascreenshot_049988104b96402c8aaa47de9a0ba10e_text_export.jpeg" alt="Paso 5: Variables disponibles">
+        </div>
+
+        <div class="step">
+            <div class="step-header">
+                <span class="step-num">6</span>
+                <p>Ya puedes visualizar nuevamente los datos!</p>
+            </div>
+            <img src="https://colony-recorder.s3.amazonaws.com/files/2024-04-19/3de5d157-e240-4869-9335-1535342b5633/ascreenshot_bfee1e267e704fa6ac13bb311771a5c4_text_export.jpeg" alt="Paso 6: Datos visualizados">
+        </div>
+
+    </div>
+</body>
+</html>
