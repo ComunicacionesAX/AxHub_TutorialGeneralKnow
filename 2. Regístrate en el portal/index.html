@@ -41,62 +41,60 @@
             font-weight: 800;
             color: var(--text);
             letter-spacing: -0.03em;
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.5rem;
         }
-        .subtitle {
-            color: var(--text-light);
-            font-size: 1rem;
+        .scribe {
+            font-size: 0.75rem;
+            color: var(--outline);
             margin-bottom: 2rem;
         }
-        .content-card {
+        .step {
             background: var(--surface);
             border-radius: 1rem;
-            padding: 2rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
             box-shadow: 0 1px 3px rgba(0,0,0,0.04);
             border: 1px solid rgba(114, 120, 127, 0.08);
         }
-        .step-list {
-            list-style: none;
-            padding: 0;
-        }
-        .step-list li {
+        .step-header {
             display: flex;
-            align-items: flex-start;
+            align-items: center;
             gap: 0.75rem;
-            padding: 0.75rem 0;
-            border-bottom: 1px solid var(--outline-variant);
-        }
-        .step-list li:last-child {
-            border-bottom: none;
+            margin-bottom: 1rem;
         }
         .step-num {
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 28px;
-            height: 28px;
-            min-width: 28px;
+            width: 32px;
+            height: 32px;
+            min-width: 32px;
             border-radius: 50%;
             background: var(--primary);
             color: #fff;
-            font-size: 0.75rem;
+            font-size: 0.875rem;
             font-weight: 700;
         }
-        .info-box {
+        .step-header p {
+            font-weight: 500;
+            color: var(--text);
+        }
+        .step img {
+            width: 100%;
+            max-width: 600px;
+            border-radius: 0.5rem;
+            border: 1px solid var(--outline-variant);
+            display: block;
+            margin: 0 auto;
+        }
+        .tip {
             background: rgba(1, 68, 105, 0.08);
             border-left: 4px solid var(--primary);
             padding: 1rem 1.25rem;
             border-radius: 0.5rem;
-            margin-top: 1.5rem;
+            margin-top: 0.5rem;
         }
-        .info-box h4 {
-            font-size: 0.875rem;
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 0.25rem;
-        }
-        .info-box p {
-            margin-bottom: 0;
+        .tip p {
             font-size: 0.875rem;
             color: var(--text-light);
         }
@@ -104,19 +102,57 @@
 </head>
 <body>
     <div class="container">
-        <h1>Regístrate en el portal</h1>
-        <p class="subtitle">Aprende a crear tu cuenta y acceder a la plataforma Asimetrix.</p>
-        <div class="content-card">
-            <ol class="step-list">
-                <li><span class="step-num">1</span> <span>Recibe tus credenciales de acceso por parte del equipo Asimetrix.</span></li>
-                <li><span class="step-num">2</span> <span>Ingresa a la URL de la plataforma proporcionada.</span></li>
-                <li><span class="step-num">3</span> <span>Usa tu usuario y contraseña temporales para iniciar sesión.</span></li>
-                <li><span class="step-num">4</span> <span>Cambia tu contraseña y configura tu perfil.</span></li>
-                <li><span class="step-num">5</span> <span>Verifica tu correo electrónico si es requerido.</span></li>
-            </ol>
-            <div class="info-box">
-                <h4>Nota</h4>
-                <p>El registro es gestionado por el equipo de Asimetrix. No se permite registro público.</p>
+        <h1>¿Cómo puedes registrarte al Portal de Asimetrix?</h1>
+        <p class="scribe">Made by Comunicaciones Asimetrix with Scribe</p>
+
+        <div class="step">
+            <div class="step-header">
+                <span class="step-num">1</span>
+                <p>Ingresa a <a href="https://asimetrix.co/asimetrix" style="color: var(--primary); font-weight: 600;">https://asimetrix.co/asimetrix</a></p>
+            </div>
+            <img src="https://colony-recorder.s3.amazonaws.com/files/2025-09-16/b9bda44b-161a-4dce-98da-1f4c7107c0cf/ascreenshot_88ce23ec160644f0939a07712590a2bf_text_export.jpeg" alt="Paso 1: Ingresar a la URL">
+        </div>
+
+        <div class="step">
+            <div class="step-header">
+                <span class="step-num">2</span>
+                <p>Cambia el idioma a tu preferencia, en este caso seleccionamos español.</p>
+            </div>
+            <img src="https://colony-recorder.s3.amazonaws.com/files/2025-09-16/b9bda44b-161a-4dce-98da-1f4c7107c0cf/ascreenshot_c8f39f8cf3214242b8ef9daf4daff7fe_text_export.jpeg" alt="Paso 2: Cambiar idioma">
+        </div>
+
+        <div class="step">
+            <div class="step-header">
+                <span class="step-num">3</span>
+                <p>Haz clic en el botón de "Login"</p>
+            </div>
+            <img src="https://colony-recorder.s3.amazonaws.com/files/2025-09-16/ba4b9994-3a0f-45e8-b7ea-6b0193fa60ef/ascreenshot_15c64b4f9b854a128e89770fab4ae1c3_text_export.jpeg" alt="Paso 3: Login">
+        </div>
+
+        <div class="step">
+            <div class="step-header">
+                <span class="step-num">4</span>
+                <p>Clic en el botón de "Regístrate".</p>
+            </div>
+            <img src="https://colony-recorder.s3.amazonaws.com/files/2025-09-16/8840177d-6259-4972-84dd-81893d676ea6/user_cropped_screenshot_18d8f0d6649a4c5ab76fad2617557ddc_text_export.jpeg" alt="Paso 4: Regístrate">
+        </div>
+
+        <div class="step">
+            <div class="step-header">
+                <span class="step-num">5</span>
+                <p>Escribe tu correo en la celda de "Tu correo" y la contraseña que quieras usar en la celda de "Tu contraseña".</p>
+            </div>
+            <img src="https://colony-recorder.s3.amazonaws.com/files/2025-09-16/7066082e-6b2d-4b6d-86a0-194886f78ca6/user_cropped_screenshot_001ec1da2b5c47b984e5e1350a479b98_text_export.jpeg" alt="Paso 5: Escribir correo y contraseña">
+        </div>
+
+        <div class="step">
+            <div class="step-header">
+                <span class="step-num">6</span>
+                <p>Haz clic en "Regístrate"</p>
+            </div>
+            <img src="https://colony-recorder.s3.amazonaws.com/files/2025-09-16/011e83b0-03b7-4dcb-b19c-e3885df93830/ascreenshot_d0c658ce15584b29ae1ceb87afbe3ff4_text_export.jpeg" alt="Paso 6: Confirmar registro">
+            <div class="tip">
+                <p><strong>Tip:</strong> Al dar clic en "Regístrate" llegará un correo de verificación. Luego, comunícate con el equipo de soporte para que podamos activar las aplicaciones necesarias.</p>
             </div>
         </div>
     </div>
