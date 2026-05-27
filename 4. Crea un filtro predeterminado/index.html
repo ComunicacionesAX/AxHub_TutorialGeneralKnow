@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crea un filtro predeterminado | Asimetrix</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #014469;
+            --primary-dark: #001a2e;
+            --primary-container: #275c82;
+            --accent: #4BA2FF;
+            --text: #181c1d;
+            --text-light: #41474e;
+            --bg: #f6fafb;
+            --surface: #ffffff;
+            --outline: #72787f;
+            --outline-variant: #c1c7cf;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--bg);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            padding: 3rem 1.5rem;
+        }
+        .container {
+            max-width: 720px;
+            width: 100%;
+        }
+        .step {
+            background: var(--surface);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+            border: 1px solid rgba(114, 120, 127, 0.08);
+        }
+        .step-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+        .step-num {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            min-width: 32px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: #fff;
+            font-size: 0.875rem;
+            font-weight: 700;
+        }
+        .step-header p {
+            font-weight: 500;
+            color: var(--text);
+        }
+        .step img {
+            width: 100%;
+            max-width: 600px;
+            border-radius: 0.5rem;
+            border: 1px solid var(--outline-variant);
+            display: block;
+            margin: 0 auto;
+        }
+        .tip {
+            background: rgba(1, 68, 105, 0.08);
+            border-left: 4px solid var(--primary);
+            padding: 1rem 1.25rem;
+            border-radius: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        .tip p {
+            font-size: 0.875rem;
+            color: var(--text-light);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <div class="step">
+            <div class="step-header">
+                <span class="step-num">1</span>
+                <p>Selecciona este icono para borrar todas las selecciones</p>
+            </div>
+            <img src="https://colony-recorder.s3.amazonaws.com/files/2025-08-28/b68efe51-0157-4bfb-b222-a9febbd115e2/ascreenshot_6ca911e0ade4402c9bb8ff04573cd4c6_text_export.jpeg" alt="Paso 1: Icono para borrar selecciones">
+        </div>
+
+        <div class="step">
+            <div class="step-header">
+                <span class="step-num">2</span>
+                <p>Selecciona los filtros requeridos en el panel de filtrado.</p>
+            </div>
+            <img src="https://colony-recorder.s3.amazonaws.com/files/2025-08-28/89971adb-9342-498b-96f6-934468e19025/ascreenshot_1e128992f8be4e7ab28fb574ea3a3f91_text_export.jpeg" alt="Paso 2: Panel de filtrado">
+        </div>
+
+        <div class="step">
+            <div class="step-header">
+                <span class="step-num">3</span>
+                <p>Selecciona los filtros requeridos en el panel de filtrado.</p>
+            </div>
+            <img src="https://colony-recorder.s3.amazonaws.com/files/2025-08-28/80796976-9773-4fe0-8228-56a82aa25cf7/ascreenshot_ff3ee260ffc24b6fbc71836d3ba2ba67_text_export.jpeg" alt="Paso 3: Panel de filtrado">
+        </div>
+
+        <div class="step">
+            <div class="step-header">
+                <span class="step-num">4</span>
+                <p>Clic en "Marcadores"</p>
+            </div>
+            <img src="https://colony-recorder.s3.amazonaws.com/files/2025-08-28/cec6dafa-24dc-440c-9a3f-25950af9b942/ascreenshot_ebf19ac9f7e0434c9e936612236f9a8c_text_export.jpeg" alt="Paso 4: Marcadores">
+        </div>
+
+        <div class="step">
+            <div class="step-header">
+                <span class="step-num">5</span>
+                <p>Clic en "Crear nuevo marcador"</p>
+            </div>
+            <img src="https://colony-recorder.s3.amazonaws.com/files/2025-08-28/b21ee042-986e-42be-a80b-96241cb1bed3/ascreenshot_e31c391447414c5e8f5de3c9b06c56f4_text_export.jpeg" alt="Paso 5: Crear nuevo marcador">
+        </div>
+
+        <div class="step">
+            <div class="step-header">
+                <span class="step-num">6</span>
+                <p>Le damos el nombre al marcador y damos clic en crear</p>
+            </div>
+            <img src="https://colony-recorder.s3.amazonaws.com/files/2025-08-28/a6eb43ca-8189-4654-a063-0259d0bffa76/ascreenshot_c5ce29edc6204d49be81883d095ee000_text_export.jpeg" alt="Paso 6: Nombrar marcador">
+        </div>
+
+        <div class="step">
+            <div class="step-header">
+                <span class="step-num">7</span>
+                <p>Para usar tus marcadores haces clic en "Marcadores"</p>
+            </div>
+            <img src="https://colony-recorder.s3.amazonaws.com/files/2025-08-28/992fbffd-c70b-4f47-b27b-cfae0375904c/ascreenshot_bd57bf24e8ad488789386114f9c845fb_text_export.jpeg" alt="Paso 7: Usar marcadores">
+        </div>
+
+        <div class="step">
+            <div class="step-header">
+                <span class="step-num">8</span>
+                <p>Seleccionamos el marcador que queremos aplicar</p>
+            </div>
+            <img src="https://colony-recorder.s3.amazonaws.com/files/2025-08-28/0b6e15d5-d692-4e98-ace2-6e375af0405c/ascreenshot_e5b679226ed949098d5d025d21b16f1e_text_export.jpeg" alt="Paso 8: Seleccionar marcador">
+        </div>
+
+        <div class="step">
+            <div class="step-header">
+                <span class="step-num">9</span>
+                <p>Selecciona los filtros requeridos en el panel de filtrado</p>
+            </div>
+            <img src="https://colony-recorder.s3.amazonaws.com/files/2025-08-28/f2ac9793-7572-4c0d-8726-2049dac82495/ascreenshot_45249cd39f5c4b3fa5747e95b4d4ca11_text_export.jpeg" alt="Paso 9: Panel de filtrado">
+        </div>
+
+        <div class="step">
+            <div class="step-header">
+                <span class="step-num">10</span>
+                <p>Selecciona los filtros requeridos en el panel de filtrado</p>
+            </div>
+            <img src="https://colony-recorder.s3.amazonaws.com/files/2025-08-28/7e60a48e-cbd9-420d-987e-2210c96b66b9/ascreenshot_7e88030693a94b128b21a732270123ca_text_export.jpeg" alt="Paso 10: Panel de filtrado">
+        </div>
+
+    </div>
+</body>
+</html>
