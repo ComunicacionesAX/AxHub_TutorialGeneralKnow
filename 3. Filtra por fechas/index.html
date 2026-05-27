@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filtra por fechas | Asimetrix</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #014469;
+            --primary-dark: #001a2e;
+            --primary-container: #275c82;
+            --accent: #4BA2FF;
+            --text: #181c1d;
+            --text-light: #41474e;
+            --bg: #f6fafb;
+            --surface: #ffffff;
+            --outline: #72787f;
+            --outline-variant: #c1c7cf;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--bg);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            padding: 3rem 1.5rem;
+        }
+        .container {
+            max-width: 720px;
+            width: 100%;
+        }
+        .step {
+            background: var(--surface);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+            border: 1px solid rgba(114, 120, 127, 0.08);
+        }
+        .step-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+        .step-num {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            min-width: 32px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: #fff;
+            font-size: 0.875rem;
+            font-weight: 700;
+        }
+        .step-header p {
+            font-weight: 500;
+            color: var(--text);
+        }
+        .step img {
+            width: 100%;
+            max-width: 600px;
+            border-radius: 0.5rem;
+            border: 1px solid var(--outline-variant);
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <div class="step">
+            <div class="step-header">
+                <span class="step-num">1</span>
+                <p>Ingresa a <a href="https://app.asimetrix.co" style="color: var(--primary); font-weight: 600;">https://app.asimetrix.co</a></p>
+            </div>
+            <img src="images/image12.jpg" alt="Paso 1: Ingresar a la plataforma">
+        </div>
+
+        <div class="step">
+            <div class="step-header">
+                <span class="step-num">2</span>
+                <p>Selecciona "Dashboard Granja"</p>
+            </div>
+            <img src="images/image2.jpg" alt="Paso 2: Seleccionar Dashboard Granja">
+        </div>
+
+        <div class="step">
+            <div class="step-header">
+                <span class="step-num">3</span>
+                <p>Haz clic para que se despliegue la lista de granjas</p>
+            </div>
+            <img src="images/image5.jpg" alt="Paso 3: Desplegar lista de granjas">
+        </div>
+
+        <div class="step">
+            <div class="step-header">
+                <span class="step-num">4</span>
+                <p>Selecciona la granja que deseas validar</p>
+            </div>
+            <img src="images/image10.jpg" alt="Paso 4: Seleccionar granja">
+        </div>
+
+        <div class="step">
+            <div class="step-header">
+                <span class="step-num">5</span>
+                <p>Selecciona el galpón</p>
+            </div>
+            <img src="images/image8.jpg" alt="Paso 5: Seleccionar galpón">
+        </div>
+
+        <div class="step">
+            <div class="step-header">
+                <span class="step-num">6</span>
+                <p>Haz clic en el selector de fechas para elegir el periodo deseado.</p>
+            </div>
+            <img src="images/image1.png" alt="Paso 6: Selector de fechas">
+        </div>
+
+        <div class="step">
+            <div class="step-header">
+                <span class="step-num">7</span>
+                <p>Selecciona la fecha que quieras validar</p>
+            </div>
+            <img src="images/image11.jpg" alt="Paso 7: Seleccionar fecha">
+        </div>
+
+        <div class="step">
+            <div class="step-header">
+                <span class="step-num">8</span>
+                <p>Selecciona el día de inicio</p>
+            </div>
+            <img src="images/image14.jpg" alt="Paso 8: Seleccionar día inicio">
+        </div>
+
+        <div class="step">
+            <div class="step-header">
+                <span class="step-num">9</span>
+                <p>Selecciona la hora de inicio</p>
+            </div>
+            <img src="images/image6.jpg" alt="Paso 9: Seleccionar hora inicio">
+        </div>
+
+        <div class="step">
+            <div class="step-header">
+                <span class="step-num">10</span>
+                <p>Ahora selecciona la fecha final</p>
+            </div>
+            <img src="images/image7.jpg" alt="Paso 10: Seleccionar fecha final">
+        </div>
+
+        <div class="step">
+            <div class="step-header">
+                <span class="step-num">11</span>
+                <p>Selecciona el día final</p>
+            </div>
+            <img src="images/image9.jpg" alt="Paso 11: Seleccionar día final">
+        </div>
+
+        <div class="step">
+            <div class="step-header">
+                <span class="step-num">12</span>
+                <p>Selecciona la hora final</p>
+            </div>
+            <img src="images/image13.jpg" alt="Paso 12: Seleccionar hora final">
+        </div>
+
+        <div class="step">
+            <div class="step-header">
+                <span class="step-num">13</span>
+                <p>Haz clic en <strong>Aceptar</strong> para confirmar la selección y aplicar los cambios.</p>
+            </div>
+            <img src="images/image3.jpg" alt="Paso 13: Confirmar selección">
+        </div>
+
+        <div class="step">
+            <div class="step-header">
+                <span class="step-num">14</span>
+                <p>Ya tienes el periodo de fechas que quieres visualizar</p>
+            </div>
+            <img src="images/image4.jpg" alt="Paso 14: Periodo de fechas aplicado">
+        </div>
+
+    </div>
+</body>
+</html>
