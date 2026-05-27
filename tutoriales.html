@@ -6,59 +6,46 @@
     <title>Tutoriales | Asimetrix</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
     <style>
         :root {
-            --ax-brand-primary: #006084;
-            --ax-brand-primary-hover: #00547A;
-            --ax-brand-primary-pressed: #00415F;
-            --ax-brand-primary-soft: #E5EFF3;
-            --ax-fg-1: #0A0F3D;
-            --ax-fg-2: #4A5566;
-            --ax-fg-3: #6C7878;
-            --ax-fg-disabled: #B4BDC4;
-            --ax-bg-1: #FFFFFF;
-            --ax-bg-2: #F5F6F8;
-            --ax-bg-3: #ECEEF1;
-            --ax-border: #D8DCE0;
-            --ax-border-strong: #B4BDC4;
-            --ax-focus-ring: rgba(0,96,132,.15);
-            --ax-shadow-xs: 0 1px 2px rgba(10,15,61,.06);
-            --ax-shadow-sm: 0 2px 4px rgba(10,15,61,.08);
-            --ax-shadow-md: 0 4px 12px rgba(10,15,61,.10);
-            --ax-shadow-lg: 0 12px 24px rgba(10,15,61,.12);
-            --ax-shadow-xl: 0 24px 48px rgba(10,15,61,.16);
-            --ax-dark-bg-1: #0A0F3D;
-            --ax-dark-bg-2: #111A52;
-            --ax-dark-bg-3: #1B2566;
-            --ax-dark-fg-1: #FFFFFF;
-            --ax-dark-fg-2: #C7CCE0;
-            --ax-dark-fg-3: #8C92AD;
-            --ax-dark-border: #2A3270;
-            --ax-ease: cubic-bezier(0.2, 0.7, 0.2, 1);
-            --ax-dur-fast: 120ms;
-            --ax-dur-base: 200ms;
-            --ax-dur-slow: 320ms;
+            --primary: #014469;
+            --primary-dark: #001a2e;
+            --primary-light: #9bccf7;
+            --primary-container: #275c82;
+            --accent: #4BA2FF;
+            --sidebar-bg: #0a1e2f;
+            --sidebar-text: #b0c4d9;
             --sidebar-width: 280px;
+            --text: #181c1d;
+            --text-light: #41474e;
+            --bg: #f6fafb;
+            --surface: #ffffff;
+            --outline: #72787f;
+            --outline-variant: #c1c7cf;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             font-size: 16px;
-            line-height: 22px;
-            letter-spacing: -0.3px;
-            color: var(--ax-fg-1);
-            background: var(--ax-bg-2);
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--bg);
             display: flex;
             min-height: 100vh;
         }
 
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
         .sidebar {
             width: var(--sidebar-width);
-            background: var(--ax-dark-bg-1);
-            color: var(--ax-dark-fg-2);
+            background: var(--sidebar-bg);
+            color: var(--sidebar-text);
             position: fixed;
             top: 0;
             left: 0;
@@ -70,28 +57,26 @@
         }
 
         .sidebar-header {
-            padding: 24px 24px 16px;
-            border-bottom: 1px solid var(--ax-dark-border);
+            padding: 1.25rem 1.25rem 0.75rem;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
         }
 
         .sidebar-header h2 {
-            font-size: 18px;
+            font-size: 1.125rem;
             font-weight: 700;
-            line-height: 23px;
-            letter-spacing: -0.3px;
-            color: var(--ax-dark-fg-1);
+            color: #fff;
+            letter-spacing: -0.02em;
         }
 
         .sidebar-header p {
-            font-size: 12px;
-            line-height: 16px;
-            letter-spacing: -0.17px;
-            color: var(--ax-dark-fg-3);
-            margin-top: 4px;
+            font-size: 0.75rem;
+            color: var(--sidebar-text);
+            margin-top: 0.25rem;
+            opacity: 0.7;
         }
 
         .sidebar-nav {
-            padding: 12px 0;
+            padding: 0.75rem 0;
             flex: 1;
         }
 
@@ -99,15 +84,14 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 10px 24px;
+            padding: 0.625rem 1.25rem;
             cursor: pointer;
-            font-size: 11px;
+            font-size: 0.8125rem;
             font-weight: 600;
-            line-height: 16px;
-            letter-spacing: 1.8px;
-            color: var(--ax-dark-fg-3);
+            color: var(--sidebar-text);
             text-transform: uppercase;
-            transition: background var(--ax-dur-fast) var(--ax-ease), color var(--ax-dur-fast) var(--ax-ease);
+            letter-spacing: 0.5px;
+            transition: all 0.2s;
             user-select: none;
             border: none;
             background: none;
@@ -116,13 +100,13 @@
         }
 
         .nav-section-header:hover {
-            background: rgba(255,255,255,.08);
-            color: var(--ax-dark-fg-1);
+            background: rgba(255,255,255,0.08);
+            color: #fff;
         }
 
         .nav-section-header .icon {
             font-size: 18px;
-            transition: transform var(--ax-dur-base) var(--ax-ease);
+            transition: transform 0.25s;
         }
 
         .nav-section-header .icon.open {
@@ -132,7 +116,7 @@
         .nav-subsection {
             max-height: 0;
             overflow: hidden;
-            transition: max-height var(--ax-dur-slow) var(--ax-ease);
+            transition: max-height 0.3s ease;
         }
 
         .nav-subsection.open {
@@ -142,15 +126,13 @@
         .nav-link {
             display: flex;
             align-items: center;
-            gap: 10px;
-            padding: 8px 24px 8px 40px;
-            color: var(--ax-dark-fg-2);
+            gap: 0.625rem;
+            padding: 0.5rem 1.25rem 0.5rem 2.5rem;
+            color: var(--sidebar-text);
             text-decoration: none;
-            font-size: 14px;
-            line-height: 18px;
-            letter-spacing: -0.2px;
+            font-size: 0.8125rem;
             font-weight: 400;
-            transition: background var(--ax-dur-fast) var(--ax-ease), color var(--ax-dur-fast) var(--ax-ease);
+            transition: all 0.15s;
             cursor: pointer;
             border: none;
             background: none;
@@ -159,29 +141,36 @@
         }
 
         .nav-link:hover {
-            background: rgba(255,255,255,.08);
-            color: var(--ax-dark-fg-1);
+            background: rgba(255,255,255,0.08);
+            color: #fff;
         }
 
         .nav-link.active {
-            color: var(--ax-dark-fg-1);
-            background: rgba(0,96,132,.25);
-            border-right: 3px solid var(--ax-brand-primary);
+            color: #fff;
+            background: rgba(75, 162, 255, 0.15);
+            border-right: 3px solid var(--accent);
             font-weight: 500;
+        }
+
+        .nav-link .material-symbols-outlined {
+            font-size: 16px;
+            opacity: 0.7;
+        }
+
+        .nav-link.active .material-symbols-outlined {
+            opacity: 1;
         }
 
         .nav-simple-link {
             display: flex;
             align-items: center;
-            gap: 10px;
-            padding: 10px 24px;
-            color: var(--ax-dark-fg-2);
+            gap: 0.625rem;
+            padding: 0.625rem 1.25rem;
+            color: var(--sidebar-text);
             text-decoration: none;
-            font-size: 14px;
-            line-height: 18px;
-            letter-spacing: -0.2px;
+            font-size: 0.8125rem;
             font-weight: 500;
-            transition: background var(--ax-dur-fast) var(--ax-ease), color var(--ax-dur-fast) var(--ax-ease);
+            transition: all 0.15s;
             cursor: pointer;
             border: none;
             background: none;
@@ -190,91 +179,85 @@
         }
 
         .nav-simple-link:hover {
-            background: rgba(255,255,255,.08);
-            color: var(--ax-dark-fg-1);
+            background: rgba(255,255,255,0.08);
+            color: #fff;
         }
 
         .nav-simple-link.active {
-            color: var(--ax-dark-fg-1);
-            background: rgba(0,96,132,.25);
-            border-right: 3px solid var(--ax-brand-primary);
+            color: #fff;
+            background: rgba(75, 162, 255, 0.15);
+            border-right: 3px solid var(--accent);
+        }
+
+        .nav-simple-link .material-symbols-outlined {
+            font-size: 20px;
         }
 
         .main {
             margin-left: var(--sidebar-width);
             flex: 1;
-            padding: 40px 48px;
+            padding: 2.5rem 3rem;
             min-height: 100vh;
         }
 
         .main-header {
-            margin-bottom: 32px;
+            margin-bottom: 2rem;
         }
 
         .main-header h1 {
-            font-size: 40px;
-            line-height: 40px;
-            letter-spacing: -0.6px;
-            font-weight: 700;
-            color: var(--ax-fg-1);
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: var(--text);
+            letter-spacing: -0.03em;
         }
 
         .main-header p {
-            color: var(--ax-fg-2);
-            margin-top: 8px;
+            color: var(--text-light);
+            margin-top: 0.5rem;
             max-width: 700px;
-            font-size: 16px;
-            line-height: 22px;
-            letter-spacing: -0.3px;
         }
 
         .tutorial-content {
-            background: var(--ax-bg-1);
-            border-radius: 12px;
-            padding: 32px;
-            box-shadow: var(--ax-shadow-sm);
-            border: 1px solid var(--ax-border);
+            background: var(--surface);
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+            border: 1px solid rgba(114, 120, 127, 0.08);
             min-height: 400px;
         }
 
         .tutorial-content h2 {
-            font-size: 24px;
-            line-height: 26px;
-            letter-spacing: -0.45px;
-            font-weight: 700;
-            color: var(--ax-fg-1);
-            margin-bottom: 16px;
+            font-size: 1.375rem;
+            font-weight: 800;
+            color: var(--text);
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
         }
 
         .tutorial-content p {
-            color: var(--ax-fg-2);
-            margin-bottom: 16px;
-            line-height: 22px;
-            letter-spacing: -0.3px;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            line-height: 1.7;
         }
 
         .tutorial-content .info-box {
-            background: var(--ax-brand-primary-soft);
-            border-left: 4px solid var(--ax-brand-primary);
-            padding: 16px 20px;
-            border-radius: 6px;
-            margin-bottom: 24px;
+            background: rgba(1, 68, 105, 0.08);
+            border-left: 4px solid var(--primary);
+            padding: 1rem 1.25rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1.5rem;
         }
 
         .tutorial-content .info-box h4 {
-            font-size: 14px;
-            line-height: 18px;
-            letter-spacing: -0.2px;
+            font-size: 0.875rem;
             font-weight: 700;
-            color: var(--ax-brand-primary);
-            margin-bottom: 4px;
+            color: var(--primary);
+            margin-bottom: 0.25rem;
         }
 
         .tutorial-content .info-box p {
             margin-bottom: 0;
-            font-size: 14px;
-            line-height: 18px;
-            letter-spacing: -0.2px;
+            font-size: 0.875rem;
         }
 
         .tutorial-content .step-list {
@@ -285,9 +268,9 @@
         .tutorial-content .step-list li {
             display: flex;
             align-items: flex-start;
-            gap: 12px;
-            padding: 12px 0;
-            border-bottom: 1px solid var(--ax-border);
+            gap: 0.75rem;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--outline-variant);
         }
 
         .tutorial-content .step-list li:last-child {
@@ -302,36 +285,18 @@
             height: 28px;
             min-width: 28px;
             border-radius: 50%;
-            background: var(--ax-brand-primary);
+            background: var(--primary);
             color: #fff;
-            font-size: 12px;
-            line-height: 16px;
-            letter-spacing: -0.17px;
+            font-size: 0.75rem;
             font-weight: 700;
         }
 
         .sidebar-footer {
-            padding: 16px 24px;
-            border-top: 1px solid var(--ax-dark-border);
-            font-size: 12px;
-            line-height: 16px;
-            letter-spacing: -0.17px;
-            color: var(--ax-dark-fg-3);
-        }
-
-        @media (max-width: 768px) {
-            .sidebar {
-                width: 100%;
-                position: relative;
-                height: auto;
-            }
-            .main {
-                margin-left: 0;
-                padding: 24px;
-            }
-            body {
-                flex-direction: column;
-            }
+            padding: 1rem 1.25rem;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            font-size: 0.75rem;
+            color: var(--sidebar-text);
+            opacity: 0.6;
         }
 
         @media (max-width: 768px) {
@@ -486,7 +451,7 @@
                     title: '¡Bienvenido al portal!',
                     description: 'Guía completa de 80 pasos para usar el tablero de visualización de Asimetrix.',
                     content: `
-                        <h2>Tutorial General de Know</h2>
+                        <h2>📊 Tutorial General de Know</h2>
                         <p>Guía completa de 80 pasos para usar el tablero de visualización de Asimetrix. Incluye navegación, filtros, exploración de datos y descarga.</p>
 
                         <div style="background:#014469;color:#fff;padding:0.75rem 1rem;border-radius:0.5rem;margin:1.5rem 0;font-weight:700;font-size:16px;">1. Navegación básica</div>
@@ -904,7 +869,7 @@
                         </div>
 
                         <div style="background:#fffbeb;border:1px solid #fbbf24;border-radius:0.5rem;padding:0.75rem;margin-top:1rem;font-size:13px;color:#78350f;">
-                            <strong>Nota:</strong> Este tutorial contiene 80 pasos prácticos para dominar el tablero de visualización de Asimetrix.
+                            <strong>📌 Nota:</strong> Este tutorial contiene 80 pasos prácticos para dominar el tablero de visualización de Asimetrix.
                         </div>
                     `
                 },
