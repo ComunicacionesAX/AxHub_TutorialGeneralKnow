@@ -374,10 +374,10 @@
                     <span class="material-symbols-outlined icon open" id="icon-plataforma">chevron_right</span>
                 </button>
                 <div class="nav-subsection open" id="sub-plataforma">
-                    <button class="nav-link active" onclick="openIframe(event, 'https://landing-hub-know.vercel.app/1.%20%C2%A1Bienvenido%20al%20portal!/')">
+                    <button class="nav-link active" onclick="openIframe(event, 'https://landing-hub-know.vercel.app/1.%20%C2%A1Bienvenido%20al%20portal!/', '¡Bienvenido al portal!', 'Conoce las mejoras y cambios de la plataforma Asimetrix.')">
                         <span class="material-symbols-outlined">home</span> ¡Bienvenido al portal!
                     </button>
-                    <button class="nav-link" data-section="plataforma" data-tutorial="registro" onclick="openTutorial('plataforma', 'registro')">
+                    <button class="nav-link" onclick="openIframe(event, 'https://landing-hub-know.vercel.app/2.%20Reg%C3%ADstrate%20en%20el%20portal/', 'Regístrate en el portal', 'Aprende a registrarte en el portal Asimetrix.')">
                         <span class="material-symbols-outlined">person_add</span> Regístrate en el portal
                     </button>
                     <button class="nav-link" data-section="plataforma" data-tutorial="filtrar-fechas" onclick="openTutorial('plataforma', 'filtrar-fechas')">
@@ -1208,12 +1208,12 @@
             }
         };
 
-        function openIframe(event, url) {
+        function openIframe(event, url, title, description) {
             document.querySelectorAll('.nav-link, .nav-simple-link').forEach(el => el.classList.remove('active'));
             const btn = event.target.closest('.nav-link, .nav-simple-link');
             if (btn) btn.classList.add('active');
-            document.getElementById('main-title').textContent = '¡Bienvenido al portal!';
-            document.getElementById('main-description').textContent = 'Tutorial general de Know';
+            document.getElementById('main-title').textContent = title || 'Tutorial';
+            document.getElementById('main-description').textContent = description || '';
             document.getElementById('tutorial-content').innerHTML = '<iframe src="' + url + '" style="width:100%;height:80vh;border:none;border-radius:0.5rem;"></iframe>';
         }
 
