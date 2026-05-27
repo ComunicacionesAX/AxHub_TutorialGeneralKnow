@@ -16,17 +16,26 @@
             --primary-container: #275c82;
             --accent: #4BA2FF;
             --accent-aqua: #00E3FF;
-            --sidebar-bg: #0a1e2f;
-            --sidebar-text: #b0c4d9;
-            --sidebar-active: #ffffff;
-            --sidebar-hover: rgba(255,255,255,0.08);
-            --sidebar-width: 280px;
+            --accent-aqua-gray: #7EC6DE;
+            --tertiary: #00484f;
+            --tertiary-container: #94f1fc;
             --text: #181c1d;
             --text-light: #41474e;
             --bg: #f6fafb;
-            --surface: #ffffff;
+            --surface: #f6fafb;
+            --surface-container-lowest: #ffffff;
+            --surface-container-low: #f0f4f5;
+            --surface-container: #eaeef0;
+            --surface-container-high: #e5e9ea;
+            --surface-container-highest: #dfe3e4;
             --outline: #72787f;
             --outline-variant: #c1c7cf;
+            --success: #166534;
+            --success-bg: #dcfce7;
+            --warning: #b45309;
+            --warning-bg: #fef3c7;
+            --error: #dc2626;
+            --error-bg: #fee2e2;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -39,12 +48,18 @@
             line-height: 1.6;
             color: var(--text);
             background: var(--bg);
-            display: flex;
             min-height: 100vh;
         }
 
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
         }
 
         .header {
@@ -54,7 +69,7 @@
             top: 0;
             left: 0;
             right: 0;
-            z-index: 200;
+            z-index: 100;
             height: 64px;
             display: flex;
             justify-content: space-between;
@@ -80,210 +95,125 @@
         .nav a:hover { background: rgba(1, 68, 105, 0.08); color: var(--primary); }
         .nav a.active { background: rgba(1, 68, 105, 0.12); color: var(--primary); font-weight: 600; }
 
-        /* Sidebar */
-        .sidebar {
-            width: var(--sidebar-width);
-            background: var(--sidebar-bg);
-            color: var(--sidebar-text);
-            position: fixed;
-            top: 64px;
-            left: 0;
-            bottom: 0;
-            overflow-y: auto;
-            z-index: 100;
-            display: flex;
-            flex-direction: column;
+        main { margin-top: 64px; padding-bottom: 4rem; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+
+        .section { padding: 3rem 1.5rem; }
+        .section-alt { background: var(--surface-container-low); }
+
+        .hero {
+            padding: 3rem 1.5rem 3rem;
+            background: var(--bg);
         }
 
-        .sidebar-header {
-            padding: 1.25rem 1.25rem 0.75rem;
-            border-bottom: 1px solid rgba(255,255,255,0.08);
-        }
-
-        .sidebar-header h2 {
-            font-size: 1.125rem;
-            font-weight: 700;
-            color: #fff;
-            letter-spacing: -0.02em;
-        }
-
-        .sidebar-header p {
-            font-size: 0.75rem;
-            color: var(--sidebar-text);
-            margin-top: 0.25rem;
-            opacity: 0.7;
-        }
-
-        .sidebar-nav {
-            padding: 0.75rem 0;
-            flex: 1;
-        }
-
-        .nav-section {
-            margin-bottom: 0.25rem;
-        }
-
-        .nav-section-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0.625rem 1.25rem;
-            cursor: pointer;
-            font-size: 0.8125rem;
-            font-weight: 600;
-            color: var(--sidebar-text);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            transition: all 0.2s;
-            user-select: none;
-            border: none;
-            background: none;
-            width: 100%;
-            text-align: left;
-        }
-
-        .nav-section-header:hover {
-            background: var(--sidebar-hover);
-            color: #fff;
-        }
-
-        .nav-section-header .icon {
-            font-size: 18px;
-            transition: transform 0.25s;
-        }
-
-        .nav-section-header .icon.open {
-            transform: rotate(90deg);
-        }
-
-        .nav-subsection {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease;
-        }
-
-        .nav-subsection.open {
-            max-height: 2000px;
-        }
-
-        .nav-link {
-            display: flex;
-            align-items: center;
-            gap: 0.625rem;
-            padding: 0.5rem 1.25rem 0.5rem 2.5rem;
-            color: var(--sidebar-text);
-            text-decoration: none;
-            font-size: 0.8125rem;
-            font-weight: 400;
-            transition: all 0.15s;
-            cursor: pointer;
-            border: none;
-            background: none;
-            width: 100%;
-            text-align: left;
-        }
-
-        .nav-link:hover {
-            background: var(--sidebar-hover);
-            color: #fff;
-        }
-
-        .nav-link.active {
-            color: #fff;
-            background: rgba(75, 162, 255, 0.15);
-            border-right: 3px solid var(--accent);
-            font-weight: 500;
-        }
-
-        .nav-link .material-symbols-outlined {
-            font-size: 16px;
-            opacity: 0.7;
-        }
-
-        .nav-link.active .material-symbols-outlined {
-            opacity: 1;
-        }
-
-        .nav-simple-link {
-            display: flex;
-            align-items: center;
-            gap: 0.625rem;
-            padding: 0.625rem 1.25rem;
-            color: var(--sidebar-text);
-            text-decoration: none;
-            font-size: 0.8125rem;
-            font-weight: 500;
-            transition: all 0.15s;
-            cursor: pointer;
-            border: none;
-            background: none;
-            width: 100%;
-            text-align: left;
-        }
-
-        .nav-simple-link:hover {
-            background: var(--sidebar-hover);
-            color: #fff;
-        }
-
-        .nav-simple-link.active {
-            color: #fff;
-            background: rgba(75, 162, 255, 0.15);
-            border-right: 3px solid var(--accent);
-        }
-
-        .nav-simple-link .material-symbols-outlined {
-            font-size: 20px;
-        }
-
-        /* Main content */
-        .main {
-            margin-left: var(--sidebar-width);
-            flex: 1;
-            padding: 5.5rem 3rem 2.5rem;
-            min-height: 100vh;
-        }
-
-        .main-header {
-            margin-bottom: 2rem;
-        }
-
-        .main-header .breadcrumb {
-            font-size: 0.8125rem;
-            color: var(--outline);
-            margin-bottom: 0.5rem;
-        }
-
-        .main-header .breadcrumb a {
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        .main-header .breadcrumb a:hover {
-            text-decoration: underline;
-        }
-
-        .main-header h1 {
+        .hero h1 {
             font-size: 1.75rem;
-            font-weight: 800;
             color: var(--text);
+            margin-bottom: 0.75rem;
+            font-weight: 800;
             letter-spacing: -0.03em;
         }
 
-        .main-header p {
+        .hero p {
+            font-size: 1rem;
             color: var(--text-light);
-            margin-top: 0.5rem;
-            max-width: 700px;
+            max-width: 600px;
+            line-height: 1.7;
         }
 
+        .section-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: var(--primary);
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 8px rgba(1, 68, 105, 0.3);
+            margin-bottom: 1rem;
+        }
+
+        .section-label .material-symbols-outlined { font-size: 16px; }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .card {
+            background: var(--surface-container-lowest);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            transition: all 0.3s;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+            border: 1px solid rgba(114, 120, 127, 0.08);
+            cursor: pointer;
+        }
+
+        .card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transform: translateY(-2px);
+        }
+
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+
+        .card-icon.primary { background: rgba(1, 68, 105, 0.1); }
+        .card-icon.accent { background: rgba(75, 162, 255, 0.1); }
+        .card-icon.aqua { background: rgba(0, 70, 79, 0.1); }
+        .card-icon.success { background: rgba(22, 101, 52, 0.1); }
+        .card-icon.warning { background: rgba(180, 83, 9, 0.1); }
+        .card-icon.error { background: rgba(220, 38, 38, 0.1); }
+
+        .card-icon .material-symbols-outlined { font-size: 24px; }
+        .card-icon.primary .material-symbols-outlined { color: var(--primary); }
+        .card-icon.accent .material-symbols-outlined { color: var(--accent); }
+        .card-icon.aqua .material-symbols-outlined { color: var(--tertiary); }
+        .card-icon.success .material-symbols-outlined { color: var(--success); }
+        .card-icon.warning .material-symbols-outlined { color: var(--warning); }
+        .card-icon.error .material-symbols-outlined { color: var(--error); }
+
+        .card h3 { font-size: 1.125rem; color: var(--text); margin-bottom: 0.5rem; font-weight: 700; }
+        .card p { color: var(--text-light); margin-bottom: 0.5rem; font-size: 0.9375rem; line-height: 1.6; }
+        .card .tag {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.6875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .card .tag.plataforma { background: rgba(1, 68, 105, 0.1); color: var(--primary); }
+        .card .tag.pigknows { background: rgba(75, 162, 255, 0.1); color: var(--accent); }
+        .card .tag.agriness { background: rgba(0, 70, 79, 0.1); color: var(--tertiary); }
+        .card .tag.porcitec { background: rgba(180, 83, 9, 0.1); color: var(--warning); }
+
         .tutorial-content {
-            background: var(--surface);
+            background: var(--surface-container-lowest);
             border-radius: 1rem;
             padding: 2rem;
             box-shadow: 0 1px 3px rgba(0,0,0,0.04);
             border: 1px solid rgba(114, 120, 127, 0.08);
-            min-height: 400px;
+            min-height: 300px;
+            display: none;
+        }
+
+        .tutorial-content.visible {
+            display: block;
         }
 
         .tutorial-content h2 {
@@ -298,17 +228,6 @@
             color: var(--text-light);
             margin-bottom: 1rem;
             line-height: 1.7;
-        }
-
-        .tutorial-content ul, .tutorial-content ol {
-            color: var(--text-light);
-            margin-bottom: 1rem;
-            padding-left: 1.5rem;
-            line-height: 1.7;
-        }
-
-        .tutorial-content li {
-            margin-bottom: 0.5rem;
         }
 
         .tutorial-content .info-box {
@@ -363,222 +282,192 @@
             font-weight: 700;
         }
 
-        .empty-state {
-            display: flex;
-            flex-direction: column;
+        .back-link {
+            display: inline-flex;
             align-items: center;
-            justify-content: center;
-            padding: 4rem 2rem;
+            gap: 0.5rem;
+            color: var(--primary);
+            font-size: 0.875rem;
+            font-weight: 500;
+            text-decoration: none;
+            margin-bottom: 1rem;
+            cursor: pointer;
+            border: none;
+            background: none;
+        }
+
+        .back-link:hover { text-decoration: underline; }
+
+        .footer {
+            background: var(--surface-container-low);
+            padding: 2rem 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-brand p {
+            color: var(--text-light);
+            font-size: 0.875rem;
+            margin-top: 0.75rem;
+            line-height: 1.7;
+        }
+
+        .footer h4 {
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text);
+        }
+
+        .footer ul { list-style: none; }
+        .footer li { margin-bottom: 0.5rem; }
+        .footer a { color: var(--text-light); text-decoration: none; font-size: 0.875rem; transition: color 0.2s; }
+        .footer a:hover { color: var(--primary); }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 2rem auto 0;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(114, 120, 127, 0.1);
             text-align: center;
         }
 
-        .empty-state .material-symbols-outlined {
-            font-size: 64px;
-            color: var(--outline-variant);
-            margin-bottom: 1rem;
+        .footer-bottom p { font-size: 0.8125rem; color: var(--text-light); }
+
+        .onix-btn {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            z-index: 50;
         }
 
-        .empty-state h3 {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--text);
-            margin-bottom: 0.5rem;
+        .onix-btn .btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-container) 100%);
+            color: white;
+            padding: 0.875rem 1.25rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            text-decoration: none;
+            box-shadow: 0 4px 16px rgba(1, 68, 105, 0.3);
         }
 
-        .empty-state p {
-            color: var(--text-light);
-            max-width: 400px;
+        .onix-btn .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(1, 68, 105, 0.4);
         }
 
-        .sidebar-footer {
-            padding: 1rem 1.25rem;
-            border-top: 1px solid rgba(255,255,255,0.08);
-            font-size: 0.75rem;
-            color: var(--sidebar-text);
-            opacity: 0.6;
-        }
+        .onix-btn .material-symbols-outlined { font-size: 20px; }
 
         @media (max-width: 768px) {
-            .header { display: none; }
-            .sidebar {
-                width: 100%;
-                position: relative;
-                height: auto;
-                top: 0;
-            }
-            .main {
-                margin-left: 0;
-                padding: 1.5rem;
-            }
-            body {
-                flex-direction: column;
-            }
+            .nav { display: none; }
+            .hero h1 { font-size: 1.5rem; }
+            .cards-grid { grid-template-columns: 1fr; }
+            .footer-content { grid-template-columns: 1fr; gap: 1.5rem; }
         }
     </style>
 </head>
 <body>
-
-    <!-- Header -->
     <header class="header">
         <div class="header-brand">
             <img src="logo-horizontal.svg" alt="Asimetrix" class="logo-asimetrix">
         </div>
         <nav class="nav">
             <a href="https://asimetrix-hub.vercel.app/">Hub</a>
-            <a href="onboarding%20(1).html" class="active">Onboarding</a>
-            <a href="tutoriales.html">Tutoriales</a>
+            <a href="onboarding%20(1).html">Onboarding</a>
+            <a href="tutoriales.html" class="active">Tutoriales</a>
         </nav>
     </header>
 
-    <!-- Sidebar -->
-    <aside class="sidebar">
-        <div class="sidebar-header">
-            <h2>Tutoriales</h2>
-            <p>Base de conocimiento Asimetrix</p>
-        </div>
+    <main>
+        <section class="hero">
+            <div class="container">
+                <a href="onboarding%20(1).html" class="back-link">
+                    <span class="material-symbols-outlined" style="font-size: 18px;">arrow_back</span>
+                    volver al onboarding
+                </a>
+                <br>
+                <span class="section-label"><span class="material-symbols-outlined">menu_book</span> tutoriales</span>
+                <h1>Base de conocimiento</h1>
+                <p>Selecciona un tutorial para aprender a usar cada funcionalidad de la plataforma Asimetrix, PigKnows, Agriness y Porcitec.</p>
+            </div>
+        </section>
 
-        <nav class="sidebar-nav">
+        <section id="tutoriales" class="section">
+            <div class="container">
+                <h2 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 1.5rem;">Tutoriales disponibles</h2>
+                <div class="cards-grid" id="tutorial-cards"></div>
 
-            <!-- Plataforma -->
-            <div class="nav-section">
-                <button class="nav-section-header" onclick="toggleSection('plataforma')">
-                    <span>Plataforma</span>
-                    <span class="material-symbols-outlined icon open" id="icon-plataforma">chevron_right</span>
-                </button>
-                <div class="nav-subsection open" id="sub-plataforma">
-                    <button class="nav-link" data-section="plataforma" data-tutorial="bienvenido" onclick="openTutorial('plataforma', 'bienvenido')">
-                        <span class="material-symbols-outlined">home</span> 1. ¡Bienvenido al portal!
+                <div id="tutorial-content-container" class="tutorial-content" style="margin-top: 2rem;">
+                    <button class="back-link" onclick="closeTutorial()" id="back-to-list" style="display: none;">
+                        <span class="material-symbols-outlined" style="font-size: 18px;">arrow_back</span>
+                        volver a tutoriales
                     </button>
-                    <button class="nav-link" data-section="plataforma" data-tutorial="registro" onclick="openTutorial('plataforma', 'registro')">
-                        <span class="material-symbols-outlined">person_add</span> Regístrate en el portal
-                    </button>
-                    <button class="nav-link" data-section="plataforma" data-tutorial="filtrar-fechas" onclick="openTutorial('plataforma', 'filtrar-fechas')">
-                        <span class="material-symbols-outlined">calendar_month</span> Filtra por fechas
-                    </button>
-                    <button class="nav-link" data-section="plataforma" data-tutorial="filtro-predeterminado" onclick="openTutorial('plataforma', 'filtro-predeterminado')">
-                        <span class="material-symbols-outlined">filter_alt</span> Crea un filtro predeterminado
-                    </button>
-                    <button class="nav-link" data-section="plataforma" data-tutorial="variable-defecto" onclick="openTutorial('plataforma', 'variable-defecto')">
-                        <span class="material-symbols-outlined">tune</span> Cambia la variable por defecto
-                    </button>
-                    <button class="nav-link" data-section="plataforma" data-tutorial="subir-archivo-know" onclick="openTutorial('plataforma', 'subir-archivo-know')">
-                        <span class="material-symbols-outlined">upload</span> Sube un archivo a Know
-                    </button>
-                    <button class="nav-link" data-section="plataforma" data-tutorial="carga-filemanager" onclick="openTutorial('plataforma', 'carga-filemanager')">
-                        <span class="material-symbols-outlined">folder</span> Carga archivos en File Manager
-                    </button>
-                    <button class="nav-link" data-section="plataforma" data-tutorial="verificar-carga" onclick="openTutorial('plataforma', 'verificar-carga')">
-                        <span class="material-symbols-outlined">fact_check</span> Verifica la carga de tu archivo
-                    </button>
-                    <button class="nav-link" data-section="plataforma" data-tutorial="visualizar-dashboard" onclick="openTutorial('plataforma', 'visualizar-dashboard')">
-                        <span class="material-symbols-outlined">dashboard</span> Visualiza la información en el dashboard
-                    </button>
-                    <button class="nav-link" data-section="plataforma" data-tutorial="cambiar-colores" onclick="openTutorial('plataforma', 'cambiar-colores')">
-                        <span class="material-symbols-outlined">palette</span> Cambia los colores de tus gráficas
-                    </button>
-                    <button class="nav-link" data-section="plataforma" data-tutorial="exportar-grafica" onclick="openTutorial('plataforma', 'exportar-grafica')">
-                        <span class="material-symbols-outlined">image</span> Exporta una gráfica en imagen o PDF
-                    </button>
-                    <button class="nav-link" data-section="plataforma" data-tutorial="descargar-datos" onclick="openTutorial('plataforma', 'descargar-datos')">
-                        <span class="material-symbols-outlined">download</span> Descarga los datos o imagen de un gráfico
-                    </button>
-                    <button class="nav-link" data-section="plataforma" data-tutorial="crear-alertas" onclick="openTutorial('plataforma', 'crear-alertas')">
-                        <span class="material-symbols-outlined">notifications</span> Crea alertas
-                    </button>
-                    <button class="nav-link" data-section="plataforma" data-tutorial="solucionar-carga" onclick="openTutorial('plataforma', 'solucionar-carga')">
-                        <span class="material-symbols-outlined">bug_report</span> Soluciona que no cargue
-                    </button>
-                    <button class="nav-link" data-section="plataforma" data-tutorial="nueva-hoja-resumen" onclick="openTutorial('plataforma', 'nueva-hoja-resumen')">
-                        <span class="material-symbols-outlined">summarize</span> Nueva hoja resumen AsimetrixKnow
-                    </button>
-                    <button class="nav-link" data-section="plataforma" data-tutorial="porcicultura" onclick="openTutorial('plataforma', 'porcicultura')">
-                        <span class="material-symbols-outlined">pets</span> Porcicultura
-                    </button>
-                    <button class="nav-link" data-section="plataforma" data-tutorial="reporte-sowmax" onclick="openTutorial('plataforma', 'reporte-sowmax')">
-                        <span class="material-symbols-outlined">assessment</span> Genera reporte SowMax
-                    </button>
+                    <div id="tutorial-content"></div>
                 </div>
             </div>
-
-            <!-- PigKnows -->
-            <div class="nav-section">
-                <button class="nav-section-header" onclick="toggleSection('pigknows')">
-                    <span>PigKnows</span>
-                    <span class="material-symbols-outlined icon" id="icon-pigknows">chevron_right</span>
-                </button>
-                <div class="nav-subsection" id="sub-pigknows">
-                    <button class="nav-simple-link" onclick="openSimple('pigknows')">
-                        <span class="material-symbols-outlined">pets</span> Tutoriales PigKnows
-                    </button>
-                </div>
-            </div>
-
-            <!-- Agriness -->
-            <div class="nav-section">
-                <button class="nav-section-header" onclick="toggleSection('agriness')">
-                    <span>Agriness</span>
-                    <span class="material-symbols-outlined icon" id="icon-agriness">chevron_right</span>
-                </button>
-                <div class="nav-subsection" id="sub-agriness">
-                    <button class="nav-simple-link" onclick="openSimple('agriness')">
-                        <span class="material-symbols-outlined">agriculture</span> Tutoriales Agriness
-                    </button>
-                </div>
-            </div>
-
-            <!-- Porcitec -->
-            <div class="nav-section">
-                <button class="nav-section-header" onclick="toggleSection('porcitec')">
-                    <span>Porcitec</span>
-                    <span class="material-symbols-outlined icon" id="icon-porcitec">chevron_right</span>
-                </button>
-                <div class="nav-subsection" id="sub-porcitec">
-                    <button class="nav-simple-link" onclick="openSimple('porcitec')">
-                        <span class="material-symbols-outlined">manufacturing</span> Tutoriales Porcitec
-                    </button>
-                </div>
-            </div>
-
-        </nav>
-
-        <div class="sidebar-footer">
-            Asimetrix &mdash; Base de conocimiento v1.0
-        </div>
-    </aside>
-
-    <!-- Main content -->
-    <main class="main">
-        <div class="main-header">
-            <a href="onboarding%20(1).html" style="display: inline-flex; align-items: center; gap: 0.5rem; color: var(--primary); font-size: 0.875rem; font-weight: 500; text-decoration: none; margin-bottom: 1rem;">
-                <span class="material-symbols-outlined" style="font-size: 18px;">arrow_back</span>
-                volver al onboarding
-            </a>
-            <h1 id="main-title">Tutoriales generales</h1>
-            <p id="main-description">Selecciona un tutorial del menú lateral para comenzar.</p>
-        </div>
-
-            <div class="tutorial-content" id="tutorial-content">
-            </div>
+        </section>
     </main>
 
-    <script>
-        function toggleSection(id) {
-            const sub = document.getElementById('sub-' + id);
-            const icon = document.getElementById('icon-' + id);
-            const isOpen = sub.classList.contains('open');
-            sub.classList.toggle('open');
-            icon.classList.toggle('open');
-        }
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <img src="logo-horizontal.svg" alt="Asimetrix" style="height: 28px; width: auto;">
+                <p>Monitoreo inteligente para tu producción. Cámaras inteligentes, sensores y herramientas de IA que transforman datos en rentabilidad.</p>
+            </div>
+            <div>
+                <h4>tutoriales</h4>
+                <ul>
+                    <li><a href="#" onclick="filterCategory('plataforma'); return false;">Plataforma</a></li>
+                    <li><a href="#" onclick="filterCategory('pigknows'); return false;">PigKnows</a></li>
+                    <li><a href="#" onclick="filterCategory('agriness'); return false;">Agriness</a></li>
+                    <li><a href="#" onclick="filterCategory('porcitec'); return false;">Porcitec</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>soporte</h4>
+                <ul>
+                    <li><a href="mailto:sebastian.ramirez@asimetrix.com">sebastian.ramirez@asimetrix.com</a></li>
+                    <li><a href="tel:3053907711">3053907711</a></li>
+                    <li><a href="tel:6046041500">(604) 6041500</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Asimetrix - monitoreo inteligente para tu producción</p>
+        </div>
+    </footer>
 
+    <div class="onix-btn">
+        <a href="https://onix.asimetrix.co/" target="_blank" class="btn">
+            <span class="material-symbols-outlined">chat</span>
+            ¡Soy Onix! Hablemos
+        </a>
+    </div>
+
+    <script>
         const tutorials = {
             plataforma: {
                 bienvenido: {
                     title: '1. ¡Bienvenido al portal!',
                     description: 'Conoce las mejoras y cambios en la plataforma Asimetrix.',
+                    icon: 'home',
                     content: `
-                        <p>Queremos que disfrutes de una experiencia más cómoda y eficiente, por eso hemos realizado una renovación completa en nuestra plataforma. A partir de ahora, encontrarás:</p>
+                        <p>Queremos que disfrutes de una experiencia más cómoda y eficiente, por eso hemos realizado una renovación completa en nuestra plataforma. A partir de ahora, encontrar\u00e1s:</p>
 
-                        <h3 style="font-size: 1.125rem; font-weight: 700; margin: 2rem 0 1rem; color: var(--primary);">1. Para hacer tu proceso más eficiente, el ingreso a tus herramientas ha cambiado</h3>
+                        <h3 style="font-size: 1.125rem; font-weight: 700; margin: 2rem 0 1rem; color: var(--primary);">1. Para hacer tu proceso m\u00e1s eficiente, el ingreso a tus herramientas ha cambiado</h3>
 
                         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2rem;">
                             <div style="background: var(--surface-container-lowest); border-radius: 0.75rem; padding: 1.25rem; border: 1px solid var(--outline-variant);">
@@ -594,20 +483,20 @@
                                     <span style="display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; min-width: 32px; border-radius: 50%; background: var(--success); color: #fff; font-size: 0.875rem; font-weight: 700;">2</span>
                                     <span style="font-weight: 600; font-size: 0.9375rem;">Ahora</span>
                                 </div>
-                                <p style="font-size: 0.875rem; color: var(--text-light); margin-bottom: 0.75rem;">Podrás seleccionar la herramienta desde un menú inicial. También podrás volver desde el botón HOME.</p>
-                                <img src="https://colony-recorder.s3.amazonaws.com/files/2024-10-23/6518cab5-e732-4c98-a453-c524660a42fd/screenshot_504c07e56df34c95a95763a452709b95_text_export.jpeg" alt="Menú inicial de herramientas" style="width: 100%; border-radius: 0.5rem; border: 1px solid var(--outline-variant);">
+                                <p style="font-size: 0.875rem; color: var(--text-light); margin-bottom: 0.75rem;">Podr\u00e1s seleccionar la herramienta desde un men\u00fa inicial. Tambi\u00e9n podr\u00e1s volver desde el bot\u00f3n HOME.</p>
+                                <img src="https://colony-recorder.s3.amazonaws.com/files/2024-10-23/6518cab5-e732-4c98-a453-c524660a42fd/screenshot_504c07e56df34c95a95763a452709b95_text_export.jpeg" alt="Men\u00fa inicial de herramientas" style="width: 100%; border-radius: 0.5rem; border: 1px solid var(--outline-variant);">
                             </div>
                         </div>
 
-                        <h3 style="font-size: 1.125rem; font-weight: 700; margin: 2rem 0 1rem; color: var(--primary);">2. Hemos renovado nuestro diseño y visualización</h3>
+                        <h3 style="font-size: 1.125rem; font-weight: 700; margin: 2rem 0 1rem; color: var(--primary);">2. Hemos renovado nuestro dise\u00f1o y visualizaci\u00f3n</h3>
 
                         <div style="background: var(--surface-container-lowest); border-radius: 0.75rem; padding: 1.25rem; margin-bottom: 1rem; border: 1px solid var(--outline-variant);">
                             <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem;">
                                 <span style="display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; min-width: 32px; border-radius: 50%; background: var(--error); color: #fff; font-size: 0.875rem; font-weight: 700;">3</span>
-                                <span style="font-weight: 600; font-size: 0.9375rem;">Antes — Gráficas</span>
+                                <span style="font-weight: 600; font-size: 0.9375rem;">Antes — Gr\u00e1ficas</span>
                             </div>
-                            <p style="font-size: 0.875rem; color: var(--text-light); margin-bottom: 0.75rem;">Veías tus gráficas de esta forma</p>
-                            <img src="https://colony-recorder.s3.amazonaws.com/files/2024-10-25/ac24c5a4-d94c-4af3-bb50-2c6dbcb0a958/screenshot_7e858ac52c894b2297d51e3815953cda_text_export.jpeg" alt="Gráficas antes" style="width: 100%; max-width: 600px; border-radius: 0.5rem; border: 1px solid var(--outline-variant);">
+                            <p style="font-size: 0.875rem; color: var(--text-light); margin-bottom: 0.75rem;">Ve\u00edas tus gr\u00e1ficas de esta forma</p>
+                            <img src="https://colony-recorder.s3.amazonaws.com/files/2024-10-25/ac24c5a4-d94c-4af3-bb50-2c6dbcb0a958/screenshot_7e858ac52c894b2297d51e3815953cda_text_export.jpeg" alt="Gr\u00e1ficas antes" style="width: 100%; max-width: 600px; border-radius: 0.5rem; border: 1px solid var(--outline-variant);">
                         </div>
 
                         <div style="background: var(--surface-container-lowest); border-radius: 0.75rem; padding: 1.25rem; margin-bottom: 1rem; border: 1px solid var(--outline-variant);">
@@ -623,22 +512,22 @@
                             <div style="background: var(--surface-container-lowest); border-radius: 0.75rem; padding: 1.25rem; border: 1px solid var(--outline-variant);">
                                 <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem;">
                                     <span style="display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; min-width: 32px; border-radius: 50%; background: var(--success); color: #fff; font-size: 0.875rem; font-weight: 700;">5</span>
-                                    <span style="font-weight: 600; font-size: 0.9375rem;">Ahora — Gráficas</span>
+                                    <span style="font-weight: 600; font-size: 0.9375rem;">Ahora — Gr\u00e1ficas</span>
                                 </div>
-                                <p style="font-size: 0.875rem; color: var(--text-light); margin-bottom: 0.75rem;">Ahora, verás tus gráficas de esta forma</p>
-                                <img src="https://colony-recorder.s3.amazonaws.com/files/2024-10-23/d6200b8e-2e34-47e9-b1b2-02b4650f0418/screenshot_acf09261a7c542008fcd22d33222a306_text_export.jpeg" alt="Gráficas ahora" style="width: 100%; border-radius: 0.5rem; border: 1px solid var(--outline-variant);">
+                                <p style="font-size: 0.875rem; color: var(--text-light); margin-bottom: 0.75rem;">Ahora, ver\u00e1s tus gr\u00e1ficas de esta forma</p>
+                                <img src="https://colony-recorder.s3.amazonaws.com/files/2024-10-23/d6200b8e-2e34-47e9-b1b2-02b4650f0418/screenshot_acf09261a7c542008fcd22d33222a306_text_export.jpeg" alt="Gr\u00e1ficas ahora" style="width: 100%; border-radius: 0.5rem; border: 1px solid var(--outline-variant);">
                             </div>
                             <div style="background: var(--surface-container-lowest); border-radius: 0.75rem; padding: 1.25rem; border: 1px solid var(--outline-variant);">
                                 <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem;">
                                     <span style="display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; min-width: 32px; border-radius: 50%; background: var(--success); color: #fff; font-size: 0.875rem; font-weight: 700;">6</span>
                                     <span style="font-weight: 600; font-size: 0.9375rem;">Ahora — Tablas</span>
                                 </div>
-                                <p style="font-size: 0.875rem; color: var(--text-light); margin-bottom: 0.75rem;">y tus tablas de pesos así</p>
+                                <p style="font-size: 0.875rem; color: var(--text-light); margin-bottom: 0.75rem;">y tus tablas de pesos as\u00ed</p>
                                 <img src="https://colony-recorder.s3.amazonaws.com/files/2024-10-25/ac371353-5fc7-4d5a-bb4f-79231e2a2f66/screenshot_d883104bba644c2ba8a8263bd0558b25_text_export.jpeg" alt="Tablas de pesos ahora" style="width: 100%; border-radius: 0.5rem; border: 1px solid var(--outline-variant);">
                             </div>
                         </div>
 
-                        <h3 style="font-size: 1.125rem; font-weight: 700; margin: 2rem 0 1rem; color: var(--primary);">3. Entendemos la importancia de visualizar tus datos según tus necesidades</h3>
+                        <h3 style="font-size: 1.125rem; font-weight: 700; margin: 2rem 0 1rem; color: var(--primary);">3. Entendemos la importancia de visualizar tus datos seg\u00fan tus necesidades</h3>
 
                         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
                             <div style="background: var(--surface-container-lowest); border-radius: 0.75rem; padding: 1.25rem; border: 1px solid var(--outline-variant);">
@@ -646,340 +535,167 @@
                                     <span style="display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; min-width: 32px; border-radius: 50%; background: var(--error); color: #fff; font-size: 0.875rem; font-weight: 700;">7</span>
                                     <span style="font-weight: 600; font-size: 0.9375rem;">Antes</span>
                                 </div>
-                                <p style="font-size: 0.875rem; color: var(--text-light); margin-bottom: 0.75rem;">Lo hacías desde un pequeño botón en la esquina superior derecha de cada tabla</p>
-                                <img src="https://colony-recorder.s3.amazonaws.com/files/2024-10-23/7467af68-a5d8-497a-b771-0fcc3293a839/screenshot_ff95b8e56e8e4e749d1d60a7658a0f5c_text_export.jpeg" alt="Botón anterior" style="width: 100%; border-radius: 0.5rem; border: 1px solid var(--outline-variant);">
+                                <p style="font-size: 0.875rem; color: var(--text-light); margin-bottom: 0.75rem;">Lo hac\u00edas desde un peque\u00f1o bot\u00f3n en la esquina superior derecha de cada tabla</p>
+                                <img src="https://colony-recorder.s3.amazonaws.com/files/2024-10-23/7467af68-a5d8-497a-b771-0fcc3293a839/screenshot_ff95b8e56e8e4e749d1d60a7658a0f5c_text_export.jpeg" alt="Bot\u00f3n anterior" style="width: 100%; border-radius: 0.5rem; border: 1px solid var(--outline-variant);">
                             </div>
                             <div style="background: var(--surface-container-lowest); border-radius: 0.75rem; padding: 1.25rem; border: 1px solid var(--outline-variant);">
                                 <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem;">
                                     <span style="display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; min-width: 32px; border-radius: 50%; background: var(--success); color: #fff; font-size: 0.875rem; font-weight: 700;">8</span>
                                     <span style="font-weight: 600; font-size: 0.9375rem;">Ahora</span>
                                 </div>
-                                <p style="font-size: 0.875rem; color: var(--text-light); margin-bottom: 0.75rem;">Lo puedes hacer desde el botón de calendario en la esquina superior izquierda</p>
-                                <img src="https://colony-recorder.s3.amazonaws.com/files/2024-10-23/fa0dc6a2-5180-401a-a03c-426450965c43/screenshot_79f42d45d27d480895cfab62657b2093_text_export.jpeg" alt="Botón de calendario" style="width: 100%; border-radius: 0.5rem; border: 1px solid var(--outline-variant);">
+                                <p style="font-size: 0.875rem; color: var(--text-light); margin-bottom: 0.75rem;">Lo puedes hacer desde el bot\u00f3n de calendario en la esquina superior izquierda</p>
+                                <img src="https://colony-recorder.s3.amazonaws.com/files/2024-10-23/fa0dc6a2-5180-401a-a03c-426450965c43/screenshot_79f42d45d27d480895cfab62657b2093_text_export.jpeg" alt="Bot\u00f3n de calendario" style="width: 100%; border-radius: 0.5rem; border: 1px solid var(--outline-variant);">
                             </div>
                         </div>
                     `
                 },
                 registro: {
-                    title: 'Regístrate en el portal',
+                    title: 'Reg\u00edstrate en el portal',
                     description: 'Aprende a crear tu cuenta y acceder a la plataforma.',
+                    icon: 'person_add',
                     content: `
-                        <h2>Regístrate en el portal</h2>
+                        <h2>Reg\u00edstrate en el portal</h2>
                         <p>Para acceder a la plataforma Asimetrix necesitas credenciales proporcionadas por el equipo de soporte.</p>
                         <ol class="step-list">
                             <li><span class="step-num">1</span> <span>Recibe tus credenciales de acceso por parte del equipo Asimetrix.</span></li>
                             <li><span class="step-num">2</span> <span>Ingresa a la URL de la plataforma proporcionada.</span></li>
-                            <li><span class="step-num">3</span> <span>Usa tu usuario y contraseña temporales para iniciar sesión.</span></li>
-                            <li><span class="step-num">4</span> <span>Cambia tu contraseña y configura tu perfil.</span></li>
-                            <li><span class="step-num">5</span> <span>Verifica tu correo electrónico si es requerido.</span></li>
+                            <li><span class="step-num">3</span> <span>Usa tu usuario y contrase\u00f1a temporales para iniciar sesi\u00f3n.</span></li>
+                            <li><span class="step-num">4</span> <span>Cambia tu contrase\u00f1a y configura tu perfil.</span></li>
+                            <li><span class="step-num">5</span> <span>Verifica tu correo electr\u00f3nico si es requerido.</span></li>
                         </ol>
                         <div class="info-box">
                             <h4>Nota</h4>
-                            <p>El registro es gestionado por el equipo de Asimetrix. No se permite registro público.</p>
+                            <p>El registro es gestionado por el equipo de Asimetrix. No se permite registro p\u00fablico.</p>
                         </div>
                     `
                 },
                 'filtrar-fechas': {
                     title: 'Filtra por fechas',
-                    description: 'Aprende a filtrar información por rango de fechas.',
+                    description: 'Aprende a filtrar informaci\u00f3n por rango de fechas.',
+                    icon: 'calendar_month',
                     content: `
                         <h2>Filtra por fechas</h2>
-                        <p>Los dashboards de Asimetrix te permiten filtrar la información por rangos de fecha para analizar periodos específicos.</p>
+                        <p>Los dashboards de Asimetrix te permiten filtrar la informaci\u00f3n por rangos de fecha para analizar periodos espec\u00edficos.</p>
                         <ol class="step-list">
                             <li><span class="step-num">1</span> <span>Ubica el selector de fechas en la parte superior del dashboard.</span></li>
                             <li><span class="step-num">2</span> <span>Selecciona la fecha de inicio y fecha de fin del periodo deseado.</span></li>
-                            <li><span class="step-num">3</span> <span>El dashboard se actualizará automáticamente mostrando los datos del rango seleccionado.</span></li>
-                        </ol>
-                    `
-                },
-                'filtro-predeterminado': {
-                    title: 'Crea un filtro predeterminado',
-                    description: 'Configura filtros que se apliquen automáticamente.',
-                    content: `
-                        <h2>Crea un filtro predeterminado</h2>
-                        <p>Puedes guardar tus filtros favoritos para que se apliquen automáticamente cada vez que ingreses al dashboard.</p>
-                        <ol class="step-list">
-                            <li><span class="step-num">1</span> <span>Aplica los filtros que desees en el dashboard.</span></li>
-                            <li><span class="step-num">2</span> <span>Busca la opción "Guardar como predeterminado".</span></li>
-                            <li><span class="step-num">3</span> <span>Asigna un nombre a tu filtro.</span></li>
-                            <li><span class="step-num">4</span> <span>El filtro se aplicará automáticamente en tu próxima visita.</span></li>
-                        </ol>
-                    `
-                },
-                'variable-defecto': {
-                    title: 'Cambia la variable por defecto',
-                    description: 'Personaliza la variable principal del dashboard.',
-                    content: `
-                        <h2>Cambia la variable por defecto</h2>
-                        <p>Personaliza cuál variable quieres ver por defecto al abrir tus dashboards.</p>
-                        <ol class="step-list">
-                            <li><span class="step-num">1</span> <span>Accede a la configuración del dashboard.</span></li>
-                            <li><span class="step-num">2</span> <span>Busca la sección "Variable por defecto".</span></li>
-                            <li><span class="step-num">3</span> <span>Selecciona la variable que deseas mostrar inicialmente.</span></li>
-                            <li><span class="step-num">4</span> <span>Guarda los cambios.</span></li>
-                        </ol>
-                    `
-                },
-                'subir-archivo-know': {
-                    title: 'Sube un archivo a Know',
-                    description: 'Aprende a cargar archivos en la sección Know.',
-                    content: `
-                        <h2>Sube un archivo a Know</h2>
-                        <p>La sección Know te permite cargar archivos para su procesamiento ETL.</p>
-                        <ol class="step-list">
-                            <li><span class="step-num">1</span> <span>Accede a la sesión de tu empresa.</span></li>
-                            <li><span class="step-num">2</span> <span>Dirígete a la sección Know.</span></li>
-                            <li><span class="step-num">3</span> <span>Selecciona la opción de carga de archivos.</span></li>
-                            <li><span class="step-num">4</span> <span>Arrastra o busca el archivo Excel (.xlsx).</span></li>
-                            <li><span class="step-num">5</span> <span>Confirma la carga y espera el correo de respuesta.</span></li>
-                        </ol>
-                        <div class="info-box">
-                            <h4>Formatos aceptados</h4>
-                            <p>Solo archivos Excel (.xlsx) originados de tu software de captura o casa genética.</p>
-                        </div>
-                    `
-                },
-                'carga-filemanager': {
-                    title: 'Carga archivos en File Manager',
-                    description: 'Gestiona tus archivos en el File Manager.',
-                    content: `
-                        <h2>Carga archivos en File Manager</h2>
-                        <p>El File Manager te permite organizar y gestionar los archivos que subes a la plataforma.</p>
-                        <ol class="step-list">
-                            <li><span class="step-num">1</span> <span>Accede a la sección de File Manager.</span></li>
-                            <li><span class="step-num">2</span> <span>Selecciona la ruta designada para tu archivo (empresa/granja).</span></li>
-                            <li><span class="step-num">3</span> <span>Arrastra o selecciona tu archivo Excel (.xlsx).</span></li>
-                            <li><span class="step-num">4</span> <span>Confirma la carga.</span></li>
-                        </ol>
-                    `
-                },
-                'verificar-carga': {
-                    title: 'Verifica la carga de tu archivo',
-                    description: 'Confirma que tu archivo se haya procesado correctamente.',
-                    content: `
-                        <h2>Verifica la carga de tu archivo</h2>
-                        <p>Después de subir un archivo, puedes verificar su estado de procesamiento.</p>
-                        <ol class="step-list">
-                            <li><span class="step-num">1</span> <span>Revisa tu correo electrónico para ver el resultado del proceso ETL.</span></li>
-                            <li><span class="step-num">2</span> <span>Ingresa a la plataforma y navega al dashboard.</span></li>
-                            <li><span class="step-num">3</span> <span>Confirma que los datos cargados se reflejen correctamente.</span></li>
-                            <li><span class="step-num">4</span> <span>Si hay errores, corrige según las observaciones del correo y vuelve a subir.</span></li>
-                        </ol>
-                    `
-                },
-                'visualizar-dashboard': {
-                    title: 'Visualiza la información en el dashboard',
-                    description: 'Aprende a navegar e interpretar los dashboards.',
-                    content: `
-                        <h2>Visualiza la información en el dashboard</h2>
-                        <p>Los dashboards de Asimetrix muestran tus datos productivos en gráficos interactivos.</p>
-                        <ol class="step-list">
-                            <li><span class="step-num">1</span> <span>Accede al dashboard desde el menú principal.</span></li>
-                            <li><span class="step-num">2</span> <span>Explora los diferentes paneles y gráficos disponibles.</span></li>
-                            <li><span class="step-num">3</span> <span>Usa los filtros para ajustar la vista a tus necesidades.</span></li>
-                            <li><span class="step-num">4</span> <span>Interactúa con los gráficos: pasa el cursor para ver detalles.</span></li>
-                        </ol>
-                    `
-                },
-                'cambiar-colores': {
-                    title: 'Cambia los colores de tus gráficas',
-                    description: 'Personaliza la apariencia visual de tus gráficos.',
-                    content: `
-                        <h2>Cambia los colores de tus gráficas</h2>
-                        <p>Personaliza la paleta de colores de tus gráficos para adaptarlos a tu marca o preferencias.</p>
-                        <ol class="step-list">
-                            <li><span class="step-num">1</span> <span>Accede a la configuración del dashboard.</span></li>
-                            <li><span class="step-num">2</span> <span>Busca la opción "Personalizar colores".</span></li>
-                            <li><span class="step-num">3</span> <span>Selecciona los nuevos colores para las series de datos.</span></li>
-                            <li><span class="step-num">4</span> <span>Guarda los cambios para que se apliquen en el dashboard.</span></li>
-                        </ol>
-                    `
-                },
-                'exportar-grafica': {
-                    title: 'Exporta una gráfica en imagen o PDF',
-                    description: 'Descarga tus gráficos como imagen o PDF.',
-                    content: `
-                        <h2>Exporta una gráfica en imagen o PDF</h2>
-                        <p>Puedes exportar cualquier gráfico del dashboard para usarlo en informes o presentaciones.</p>
-                        <ol class="step-list">
-                            <li><span class="step-num">1</span> <span>Haz clic en el gráfico que deseas exportar.</span></li>
-                            <li><span class="step-num">2</span> <span>Busca el botón de exportar (generalmente un icono de descarga).</span></li>
-                            <li><span class="step-num">3</span> <span>Selecciona el formato: imagen (PNG) o PDF.</span></li>
-                            <li><span class="step-num">4</span> <span>El archivo se descargará automáticamente.</span></li>
-                        </ol>
-                    `
-                },
-                'descargar-datos': {
-                    title: 'Descarga los datos o imagen de un gráfico',
-                    description: 'Obtén los datos fuente o la imagen de cualquier gráfico.',
-                    content: `
-                        <h2>Descarga los datos o imagen de un gráfico</h2>
-                        <p>Además de exportar la imagen, puedes descargar los datos fuente del gráfico en formato CSV o Excel.</p>
-                        <ol class="step-list">
-                            <li><span class="step-num">1</span> <span>Selecciona el gráfico del que deseas obtener los datos.</span></li>
-                            <li><span class="step-num">2</span> <span>Haz clic en el menú de opciones del gráfico.</span></li>
-                            <li><span class="step-num">3</span> <span>Elige "Descargar datos" para obtener CSV/Excel.</span></li>
-                            <li><span class="step-num">4</span> <span>O elige "Descargar imagen" para obtener el gráfico como PNG.</span></li>
-                        </ol>
-                    `
-                },
-                'crear-alertas': {
-                    title: 'Crea alertas',
-                    description: 'Configura notificaciones para eventos importantes.',
-                    content: `
-                        <h2>Crea alertas</h2>
-                        <p>Las alertas te notifican cuando ocurren eventos importantes en tus datos productivos.</p>
-                        <ol class="step-list">
-                            <li><span class="step-num">1</span> <span>Accede a la sección de Alertas desde el menú.</span></li>
-                            <li><span class="step-num">2</span> <span>Haz clic en "Crear nueva alerta".</span></li>
-                            <li><span class="step-num">3</span> <span>Define las condiciones: variable, umbral, frecuencia.</span></li>
-                            <li><span class="step-num">4</span> <span>Selecciona el canal de notificación (correo, SMS, in-app).</span></li>
-                            <li><span class="step-num">5</span> <span>Guarda la alerta y actívala.</span></li>
-                        </ol>
-                    `
-                },
-                'solucionar-carga': {
-                    title: 'Soluciona que no cargue',
-                    description: 'Resuelve problemas comunes al cargar archivos.',
-                    content: `
-                        <h2>Soluciona que no cargue</h2>
-                        <p>Si tu archivo no se carga correctamente, sigue estos pasos para resolverlo.</p>
-                        <div class="info-box">
-                            <h4>Pasos rápidos</h4>
-                            <p>1. Verifica que el archivo sea .xlsx. 2. Revisa que tenga datos. 3. Confirma los nombres de columnas. 4. Asegúrate de estar en la carpeta correcta.</p>
-                        </div>
-                        <ol class="step-list">
-                            <li><span class="step-num">1</span> <span>Lee el correo que te llegó de Asimetrix para identificar el error.</span></li>
-                            <li><span class="step-num">2</span> <span>Abre tu archivo de Excel y corrige lo que te marcaron.</span></li>
-                            <li><span class="step-num">3</span> <span>Guarda el archivo con el mismo nombre.</span></li>
-                            <li><span class="step-num">4</span> <span>Súbelo otra vez a la misma carpeta.</span></li>
-                            <li><span class="step-num">5</span> <span>Espera el nuevo correo (tarda máximo 2 días hábiles).</span></li>
-                        </ol>
-                    `
-                },
-                'nueva-hoja-resumen': {
-                    title: 'Nueva hoja resumen AsimetrixKnow',
-                    description: 'Conoce la nueva hoja de resumen en AsimetrixKnow.',
-                    content: `
-                        <h2>Nueva hoja resumen AsimetrixKnow</h2>
-                        <p>La hoja resumen de AsimetrixKnow te ofrece una vista consolidada de los indicadores clave de tu producción.</p>
-                        <ol class="step-list">
-                            <li><span class="step-num">1</span> <span>Accede al módulo AsimetrixKnow desde el menú principal.</span></li>
-                            <li><span class="step-num">2</span> <span>Selecciona la opción "Hoja resumen".</span></li>
-                            <li><span class="step-num">3</span> <span>Visualiza los indicadores consolidados de tu operación.</span></li>
-                            <li><span class="step-num">4</span> <span>Usa los filtros para personalizar la vista.</span></li>
-                        </ol>
-                    `
-                },
-                porcicultura: {
-                    title: 'Porcicultura',
-                    description: 'Módulo de porcicultura en la plataforma.',
-                    content: `
-                        <h2>Porcicultura</h2>
-                        <p>El módulo de porcicultura te permite gestionar y analizar los datos de tu producción porcina.</p>
-                        <p>Incluye indicadores clave como conversión alimenticia, ganancia de peso diaria, tasas de mortalidad y más.</p>
-                        <div class="info-box">
-                            <h4>Indicadores disponibles</h4>
-                            <p>Conversión alimenticia, peso promedio, edad al sacrificio, tasa de reemplazo, y más.</p>
-                        </div>
-                    `
-                },
-                'reporte-sowmax': {
-                    title: 'Genera reporte SowMax',
-                    description: 'Aprende a generar reportes en SowMax.',
-                    content: `
-                        <h2>Genera reporte SowMax</h2>
-                        <p>SowMax te permite generar reportes detallados sobre la gestión reproductiva de tu hato porcino.</p>
-                        <ol class="step-list">
-                            <li><span class="step-num">1</span> <span>Accede al módulo SowMax desde el menú.</span></li>
-                            <li><span class="step-num">2</span> <span>Selecciona el tipo de reporte que deseas generar.</span></li>
-                            <li><span class="step-num">3</span> <span>Define los parámetros del reporte (fechas, lotes, etc.).</span></li>
-                            <li><span class="step-num">4</span> <span>Haz clic en "Generar reporte".</span></li>
-                            <li><span class="step-num">5</span> <span>Descarga el reporte en tu formato preferido.</span></li>
+                            <li><span class="step-num">3</span> <span>El dashboard se actualizar\u00e1 autom\u00e1ticamente mostrando los datos del rango seleccionado.</span></li>
                         </ol>
                     `
                 }
             }
         };
 
+        const categories = {
+            plataforma: { label: 'Plataforma', icon: 'devices', color: 'primary' },
+            pigknows: { label: 'PigKnows', icon: 'pets', color: 'accent' },
+            agriness: { label: 'Agriness', icon: 'agriculture', color: 'aqua' },
+            porcitec: { label: 'Porcitec', icon: 'manufacturing', color: 'warning' }
+        };
+
         const simpleSections = {
             pigknows: {
                 title: 'Tutoriales PigKnows',
-                description: 'Contenido educativo sobre PigKnows.',
-                content: `
-                    <h2>PigKnows</h2>
-                    <p>Próximamente encontrarás aquí los tutoriales sobre PigKnows, la plataforma de gestión porcina.</p>
-                    <div class="info-box">
-                        <h4>Disponible pronto</h4>
-                        <p>Estamos preparando el contenido educativo para PigKnows. Vuelve pronto.</p>
-                    </div>
-                `
+                description: 'Pr\u00f3ximamente encontrar\u00e1s tutoriales sobre PigKnows, la plataforma de gesti\u00f3n porcina.'
             },
             agriness: {
                 title: 'Tutoriales Agriness',
-                description: 'Contenido educativo sobre Agriness.',
-                content: `
-                    <h2>Agriness</h2>
-                    <p>Próximamente encontrarás aquí los tutoriales sobre Agriness, la plataforma de gestión avícola.</p>
-                    <div class="info-box">
-                        <h4>Disponible pronto</h4>
-                        <p>Estamos preparando el contenido educativo para Agriness. Vuelve pronto.</p>
-                    </div>
-                `
+                description: 'Pr\u00f3ximamente encontrar\u00e1s tutoriales sobre Agriness, la plataforma de gesti\u00f3n av\u00edcola.'
             },
             porcitec: {
                 title: 'Tutoriales Porcitec',
-                description: 'Contenido educativo sobre Porcitec.',
-                content: `
-                    <h2>Porcitec</h2>
-                    <p>Próximamente encontrarás aquí los tutoriales sobre Porcitec, la plataforma de gestión porcina.</p>
-                    <div class="info-box">
-                        <h4>Disponible pronto</h4>
-                        <p>Estamos preparando el contenido educativo para Porcitec. Vuelve pronto.</p>
-                    </div>
-                `
+                description: 'Pr\u00f3ximamente encontrar\u00e1s tutoriales sobre Porcitec, la plataforma de gesti\u00f3n porcina.'
             }
         };
 
-        function openTutorial(section, tutorialId) {
-            document.querySelectorAll('.nav-link, .nav-simple-link').forEach(el => el.classList.remove('active'));
+        let currentCategory = null;
+        let currentTutorial = null;
 
-            const btn = document.querySelector(`[data-section="${section}"][data-tutorial="${tutorialId}"]`);
-            if (btn) btn.classList.add('active');
+        function renderCards(category) {
+            const grid = document.getElementById('tutorial-cards');
+            const data = tutorials[category];
+            const cat = categories[category];
+            grid.innerHTML = '';
 
-            const data = tutorials[section][tutorialId];
-            if (!data) return;
+            document.getElementById('tutorial-content-container').classList.remove('visible');
+            document.getElementById('back-to-list').style.display = 'none';
 
-            document.getElementById('main-title').textContent = data.title;
-            document.getElementById('main-description').textContent = data.description;
-            document.getElementById('tutorial-content').innerHTML = data.content;
+            if (!data) {
+                const section = simpleSections[category];
+                if (section) {
+                    const card = document.createElement('div');
+                    card.className = 'card';
+                    card.innerHTML = `
+                        <div class="card-icon ${cat.color}">
+                            <span class="material-symbols-outlined">${cat.icon}</span>
+                        </div>
+                        <h3>${section.title}</h3>
+                        <p>${section.description}</p>
+                        <span class="tag ${category}">${cat.label}</span>
+                    `;
+                    grid.appendChild(card);
+                }
+                return;
+            }
+
+            Object.keys(data).forEach(key => {
+                const t = data[key];
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.onclick = function() { openTutorial(category, key); };
+                card.innerHTML = `
+                    <div class="card-icon ${cat.color}">
+                        <span class="material-symbols-outlined">${t.icon || 'menu_book'}</span>
+                    </div>
+                    <h3>${t.title}</h3>
+                    <p>${t.description}</p>
+                    <span class="tag ${category}">${cat.label}</span>
+                `;
+                grid.appendChild(card);
+            });
         }
 
-        function openSimple(id) {
-            document.querySelectorAll('.nav-link, .nav-simple-link').forEach(el => el.classList.remove('active'));
-
-            const btn = document.querySelector(`.nav-simple-link[onclick*="'${id}'"]`);
-            if (btn) btn.classList.add('active');
-
-            const data = simpleSections[id];
+        function openTutorial(category, tutorialId) {
+            const data = tutorials[category][tutorialId];
             if (!data) return;
 
-            document.getElementById('main-title').textContent = data.title;
-            document.getElementById('main-description').textContent = data.description;
+            currentCategory = category;
+            currentTutorial = tutorialId;
+
+            document.getElementById('tutorial-cards').innerHTML = '';
+            const container = document.getElementById('tutorial-content-container');
+            container.classList.add('visible');
+            document.getElementById('back-to-list').style.display = 'inline-flex';
             document.getElementById('tutorial-content').innerHTML = data.content;
+
+            document.getElementById('tutorial-content-container').scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
 
-        // Auto-open tutorial from URL parameter or default to first
+        function closeTutorial() {
+            document.getElementById('tutorial-content-container').classList.remove('visible');
+            document.getElementById('back-to-list').style.display = 'none';
+            document.getElementById('tutorial-content').innerHTML = '';
+            if (currentCategory) {
+                renderCards(currentCategory);
+            }
+        }
+
+        function filterCategory(cat) {
+            renderCards(cat);
+            document.getElementById('tutoriales').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // Auto-open from URL or default
         window.addEventListener('DOMContentLoaded', function() {
             const params = new URLSearchParams(window.location.search);
             const tutorialParam = params.get('tutorial');
-            if (tutorialParam && tutorials.plataforma[tutorialParam]) {
+            if (tutorialParam && tutorials.plataforma && tutorials.plataforma[tutorialParam]) {
+                renderCards('plataforma');
                 openTutorial('plataforma', tutorialParam);
             } else {
-                openTutorial('plataforma', 'bienvenido');
+                filterCategory('plataforma');
             }
         });
     </script>
-
 </body>
 </html>
