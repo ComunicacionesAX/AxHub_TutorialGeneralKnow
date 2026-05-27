@@ -52,38 +52,7 @@
 
         h1, h2, h3, h4 { font-family: 'Inter', sans-serif; font-weight: 700; line-height: 1.2; letter-spacing: -0.02em; }
 
-        .header {
-            background: var(--surface-container-lowest);
-            padding: 0 1.5rem;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 100;
-            height: 64px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid rgba(114, 120, 127, 0.1);
-        }
-
-        .header-brand { display: flex; align-items: center; gap: 0.75rem; }
-        .logo-asimetrix { height: 32px; width: auto; }
-
-        .nav { display: flex; gap: 0.25rem; }
-        .nav a {
-            color: var(--text-light);
-            text-decoration: none;
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            font-size: 0.875rem;
-            font-weight: 500;
-            transition: all 0.2s;
-        }
-        .nav a:hover { background: rgba(1, 68, 105, 0.08); color: var(--primary); }
-        .nav a.active { background: rgba(1, 68, 105, 0.12); color: var(--primary); font-weight: 600; }
-
-        main { margin-top: 64px; }
+        main { margin-top: 0; }
 
         .hero {
             padding: 3rem 1.5rem;
@@ -239,37 +208,9 @@
             display: block;
         }
 
-        .footer {
-            background: var(--surface-container-low);
-            padding: 2rem 1.5rem;
-        }
-        .footer-content {
-            max-width: 1000px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-        }
-        .footer-brand p { color: var(--text-light); font-size: 0.875rem; margin-top: 0.75rem; }
-        .footer h4 { font-size: 0.75rem; font-weight: 700; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 1px; }
-        .footer ul { list-style: none; }
-        .footer li { margin-bottom: 0.5rem; }
-        .footer a { color: var(--text-light); text-decoration: none; font-size: 0.875rem; }
-        .footer a:hover { color: var(--primary); }
-        .footer-bottom {
-            max-width: 1000px;
-            margin: 2rem auto 0;
-            padding-top: 1.5rem;
-            border-top: 1px solid rgba(114, 120, 127, 0.1);
-            text-align: center;
-        }
-        .footer-bottom p { font-size: 0.8125rem; color: var(--text-light); }
-
         @media (max-width: 768px) {
-            .nav { display: none; }
             .hero h1 { font-size: 1.5rem; }
             .comparison-grid { grid-template-columns: 1fr; }
-            .footer-content { grid-template-columns: 1fr; }
         }
 
         @media (max-width: 480px) {
@@ -278,17 +219,6 @@
     </style>
 </head>
 <body>
-    <header class="header">
-        <div class="header-brand">
-            <img src="../logo-horizontal.svg" alt="Asimetrix" class="logo-asimetrix">
-        </div>
-        <nav class="nav">
-            <a href="https://asimetrix-hub.vercel.app/">Hub</a>
-            <a href="../onboarding%20(1).html">Onboarding</a>
-            <a href="../tutoriales.html" class="active">Tutoriales</a>
-        </nav>
-    </header>
-
     <main>
         <section class="hero">
             <div class="container">
@@ -400,33 +330,6 @@
         </section>
     </main>
 
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-brand">
-                <img src="../logo-horizontal.svg" alt="Asimetrix" style="height: 28px; width: auto;">
-                <p>Monitoreo inteligente para tu producci&oacute;n. C&aacute;maras inteligentes, sensores y herramientas de IA que transforman datos en rentabilidad.</p>
-            </div>
-            <div>
-                <h4>tutoriales</h4>
-                <ul>
-                    <li><a href="../tutoriales.html">Plataforma</a></li>
-                    <li><a href="../tutoriales.html">PigKnows</a></li>
-                    <li><a href="../tutoriales.html">Agriness</a></li>
-                    <li><a href="../tutoriales.html">Porcitec</a></li>
-                </ul>
-            </div>
-            <div>
-                <h4>soporte</h4>
-                <ul>
-                    <li><a href="mailto:sebastian.ramirez@asimetrix.com">sebastian.ramirez@asimetrix.com</a></li>
-                    <li><a href="tel:3053907711">3053907711</a></li>
-                    <li><a href="tel:6046041500">(604) 6041500</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 Asimetrix &mdash; monitoreo inteligente para tu producci&oacute;n</p>
-        </div>
-    </footer>
+
 </body>
 </html>
